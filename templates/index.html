@@ -1,149 +1,321 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Balbriggan Community Garden - Learn to Garden</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="/" class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Balbriggan Community Garden</span>
+{% extends "base.html" %}
+
+{% block title %}GrowBalbriggan - Start Your North County Dublin Garden Adventure{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-emoji">🌊🌱✨</div>
+    <h1>Grow Your Garden in Balbriggan!</h1>
+    <p>Discover the joy of gardening in North County Dublin's vibrant coastal town. Fresh, fun, and full of life!</p>
+    <a href="#get-started" class="btn">
+        <span class="btn-emoji">🚀</span> Start Growing Today!
+    </a>
+</section>
+
+<!-- Quick Intro -->
+<section class="container intro-section">
+    <div class="intro-card">
+        <h2><span class="intro-emoji">🌊</span> Coastal Gardening Magic</h2>
+        <p>Balbriggan's unique position between the Irish Sea and rolling Dublin hills creates perfect growing conditions for amazing plants!</p>
+        
+        <div class="climate-facts">
+            <div class="fact">
+                <span class="fact-emoji">🌡️</span>
+                <h4>Mild Coastal Climate</h4>
+                <p>Protected from harsh frosts</p>
+            </div>
+            <div class="fact">
+                <span class="fact-emoji">🌅</span>
+                <h4>Long Growing Season</h4>
+                <p>March to November goodness!</p>
+            </div>
+            <div class="fact">
+                <span class="fact-emoji">🤝</span>
+                <h4>Awesome Community</h4>
+                <p>Local gardeners ready to help</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Start Tips -->
+<section class="container quick-start">
+    <h2><span class="section-emoji">⚡</span> Quick-Start Guide for Beginners</h2>
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-emoji">🌱</div>
+            <h3>Start Small</h3>
+            <p>Begin with herbs or salad leaves in containers</p>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-emoji">📍</div>
+            <h3>Choose Your Spot</h3>
+            <p>Balbriggan gardens need 4-6 hours of sun</p>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-emoji">💧</div>
+            <h3>Water Wisely</h3>
+            <p>Our coastal breeze means less watering needed!</p>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-emoji">🎉</div>
+            <h3>Share & Celebrate</h3>
+            <p>Join our Saturday market plant swaps</p>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Plants -->
+<section class="container featured-plants" id="get-started">
+    <h2><span class="section-emoji">🌟</span> Balbriggan Favourites</h2>
+    <p class="section-subtitle">Plants that absolutely love our North County Dublin climate!</p>
+    
+    <div class="plants-grid">
+        {% for plant in plants %}
+        <div class="plant-card">
+            <div class="plant-emoji">{{ plant.emoji }}</div>
+            <h3>{{ plant.name }}</h3>
+            <p>{{ plant.description }}</p>
+            <div class="plant-meta">
+                <span class="meta-item">
+                    <span class="meta-emoji">☀️</span> {{ plant.sun }}
+                </span>
+                <span class="meta-item">
+                    <span class="meta-emoji">📅</span> {{ plant.planting_time }}
+                </span>
+            </div>
+            <span class="difficulty-badge {{ plant.difficulty }}">{{ plant.difficulty|capitalize }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Local Events -->
+<section class="container local-events">
+    <h2><span class="section-emoji">🎪</span> What's Growing in Balbriggan</h2>
+    
+    <div class="events-grid">
+        {% for event in events %}
+        <div class="event-card">
+            <div class="event-emoji">{{ event.emoji }}</div>
+            <div class="event-date">{{ event.date }}</div>
+            <h3>{{ event.event }}</h3>
+            <p class="event-location">{{ event.location }}</p>
+            <a href="/community" class="btn btn-small">
+                <span class="btn-emoji">👉</span> Join In
             </a>
-            <div class="nav-links">
-                <a href="/" class="active">Home</a>
-                <a href="/tips">Gardening Tips</a>
-                <a href="/plants">Plants Guide</a>
-                <a href="/seasonal">Seasonal Guide</a>
-                <a href="/contact">Contact</a>
-            </div>
-            <button class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
-    </nav>
+        {% endfor %}
+    </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Grow Your Garden in Balbriggan</h1>
-            <p>Learn to garden in our small Irish town with local tips, seasonal advice, and community support</p>
-            <a href="#get-started" class="btn">Start Growing Today</a>
-        </div>
-    </section>
-
-    <!-- Introduction -->
-    <section class="introduction">
-        <div class="container">
-            <h2>Welcome to Gardening in </h2>
-            <p>Gardening in Balbriggan's unique coastal climate offers both challenges and rewards. Our mild, damp weather is perfect for certain plants that thrive in Irish conditions.</p>
-            <div class="weather-widget">
-                <i class="fas fa-cloud-sun-rain"></i>
-                <span>Typical Balbriggan Weather: Mild & Moist</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quick Tips -->
-    <section class="quick-tips">
-        <div class="container">
-            <h2>Top Gardening Tips for Beginners</h2>
-            <div class="tips-grid">
-                {% for tip in tips %}
-                <div class="tip-card">
-                    <div class="tip-icon">
-                        <i class="{{ tip.icon }}"></i>
-                    </div>
-                    <h3>{{ tip.title }}</h3>
-                    <p>{{ tip.description }}</p>
-                    <span class="season-badge">{{ tip.season }}</span>
+<!-- Community Spotlight -->
+<section class="community-spotlight">
+    <div class="container">
+        <div class="spotlight-content">
+            <h2><span class="section-emoji">👥</span> Meet Your Growing Neighbours</h2>
+            <p>Balbriggan has an amazing gardening community! From balcony gardens to allotments, we're all growing together.</p>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-emoji">👩‍🌾</div>
+                    <p>"I started with one tomato plant - now I supply the local café! GrowBalbriggan changed everything!"</p>
+                    <div class="testimonial-author">- Sarah, Harbour Road</div>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Plants Section -->
-    <section class="featured-plants" id="get-started">
-        <div class="container">
-            <h2>Plants That Thrive in Balbriggan</h2>
-            <div class="plants-grid">
-                {% for plant in plants %}
-                <div class="plant-card">
-                    <img src="{{ url_for('static', filename='images/' + plant.image) }}" alt="{{ plant.name }}" class="plant-img">
-                    <div class="plant-info">
-                        <h3>{{ plant.name }}</h3>
-                        <p class="plant-desc">{{ plant.description }}</p>
-                        <div class="plant-meta">
-                            <span><i class="fas fa-sun"></i> {{ plant.sun }}</span>
-                            <span><i class="fas fa-calendar"></i> {{ plant.planting_time }}</span>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Community Section -->
-    <section class="community">
-        <div class="container">
-            <div class="community-content">
-                <h2>Join Our Gardening Community</h2>
-                <p>Connect with local gardeners, share cuttings, and learn from experienced growers in Balbriggan</p>
-                <div class="community-features">
-                    <div class="feature">
-                        <i class="fas fa-users"></i>
-                        <h3>Monthly Meetups</h3>
-                        <p>First Saturday of every month at the Community Centre</p>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-seedling"></i>
-                        <h3>Seed Exchange</h3>
-                        <p>Swap seeds and plants with local gardeners</p>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-hands-helping"></i>
-                        <h3>Beginner Workshops</h3>
-                        <p>Free workshops for new gardeners</p>
-                    </div>
+                <div class="testimonial">
+                    <div class="testimonial-emoji">👨‍👩‍👧‍👦</div>
+                    <p>"My kids love planting seeds at the community garden. Best family activity in Balbriggan!"</p>
+                    <div class="testimonial-author">- The Murphy Family</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+{% endblock %}
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Balbriggan Community Garden</h3>
-                    <p>Growing together in our beautiful North Dublin town</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <a href="/tips">Gardening Tips</a>
-                    <a href="/plants">Plant Guide</a>
-                    <a href="/seasonal">Seasonal Calendar</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p><i class="fas fa-envelope"></i> info@clongarden.ie</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Community Centre, Balbriggan</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Balbriggan Community Garden. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+{% block extra_css %}
+<style>
+.intro-card {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    text-align: center;
+    margin-bottom: 3rem;
+}
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+.intro-emoji {
+    font-size: 2.5rem;
+}
+
+.climate-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.fact {
+    padding: 1.5rem;
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+    transition: transform 0.3s;
+}
+
+.fact:hover {
+    transform: translateY(-5px);
+}
+
+.fact-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.quick-start {
+    margin: 4rem 0;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.step {
+    text-align: center;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    position: relative;
+    box-shadow: var(--shadow-light);
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    background: var(--primary-green);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.step-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+
+.plant-meta {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.local-events {
+    margin: 4rem 0;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.event-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s;
+}
+
+.event-card:hover {
+    transform: scale(1.05);
+}
+
+.event-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.event-date {
+    background: var(--gradient-ocean);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-round);
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.event-location {
+    color: var(--accent-teal);
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+.community-spotlight {
+    background: var(--gradient-blossom);
+    color: var(--white);
+    padding: 4rem 0;
+    margin: 4rem 0;
+    border-radius: var(--border-radius);
+}
+
+.spotlight-content {
+    text-align: center;
+}
+
+.testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.testimonial {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
+}
+
+.testimonial-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial-author {
+    margin-top: 1rem;
+    font-weight: 600;
+    font-style: italic;
+}
+</style>
+{% endblock %}
