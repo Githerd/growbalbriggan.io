@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Guide - Clonakilty Community Garden</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <i class="fas fa-seedling"></i>
+                <span>Clonakilty Community Garden</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/tips">Gardening Tips</a>
+                <a href="/plants" class="active">Plants Guide</a>
+                <a href="/seasonal">Seasonal Guide</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container" style="padding: 4rem 0;">
+        <h1>Plants for Clonakilty Gardens</h1>
+        <p class="subtitle">Discover what grows best in our West Cork climate</p>
+        
+        <div class="plant-filters" style="margin: 2rem 0;">
+            <button class="btn plant-filter active" data-type="all">All Plants</button>
+            <button class="btn plant-filter" data-type="vegetable">Vegetables</button>
+            <button class="btn plant-filter" data-type="fruit">Fruits</button>
+            <button class="btn plant-filter" data-type="flower">Flowers</button>
+        </div>
+        
+        <div class="plants-grid">
+            {% for plant in plants %}
+            <div class="plant-card" data-type="{{ plant.type }}">
+                <img src="{{ url_for('static', filename='images/' + plant.image) }}" alt="{{ plant.name }}" class="plant-img" 
+                     onerror="this.src='https://via.placeholder.com/300x200?text=Plant+Image'">
+                <div class="plant-info">
+                    <h3>{{ plant.name }}</h3>
+                    <p class="plant-desc">{{ plant.description }}</p>
+                    <div class="plant-meta">
+                        <span><i class="fas fa-sun"></i> {{ plant.sun }}</span>
+                        <span><i class="fas fa-calendar"></i> {{ plant.planting_time }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Clonakilty Community Garden</h3>
+                    <p>Growing together in our beautiful West Cork town</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="/">Home</a>
+                    <a href="/tips">Gardening Tips</a>
+                    <a href="/seasonal">Seasonal Calendar</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@clongarden.ie</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Community Centre, Clonakilty</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Clonakilty Community Garden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
