@@ -1,56 +1,62 @@
 [
     {
         "id": 1,
-        "name": "Irish Potatoes",
-        "description": "Thrive in our cool, damp climate. Plant in March-April.",
+        "name": "Sea Kale",
+        "description": "Loves our coastal breeze! Edible and beautiful.",
         "sun": "Full Sun",
-        "planting_time": "March-April",
-        "image": "potatoes.jpg",
+        "planting_time": "Spring",
+        "emoji": "🌊",
+        "difficulty": "easy",
         "type": "vegetable"
     },
     {
         "id": 2,
-        "name": "Cabbage",
-        "description": "Hardy and perfect for Irish weather. Great for colcannon!",
-        "sun": "Partial Sun",
-        "planting_time": "April-May",
-        "image": "cabbage.jpg",
-        "type": "vegetable"
-    },
-    {
-        "id": 3,
-        "name": "Rhubarb",
-        "description": "Grows well in West Cork. Needs minimal maintenance.",
-        "sun": "Partial Shade",
-        "planting_time": "Autumn/Spring",
-        "image": "rhubarb.jpg",
+        "name": "Balbriggan Berries",
+        "description": "Strawberries & raspberries thrive in our microclimate.",
+        "sun": "6+ hours",
+        "planting_time": "March-May",
+        "emoji": "🍓",
+        "difficulty": "medium",
         "type": "fruit"
     },
     {
-        "id": 4,
-        "name": "Hydrangeas",
-        "description": "Love acidic soil and thrive with our rainfall.",
-        "sun": "Partial Shade",
-        "planting_time": "Spring",
-        "image": "hydrangeas.jpg",
-        "type": "flower"
+        "id": 3,
+        "name": "Coastal Herbs",
+        "description": "Rosemary, thyme & sage love the seaside air.",
+        "sun": "Full Sun",
+        "planting_time": "April-June",
+        "emoji": "🌿",
+        "difficulty": "easy",
+        "type": "herb"
     },
     {
-        "id": 5,
-        "name": "Carrots",
-        "description": "Grow well in deep, stone-free soil. Perfect for Clonakilty's sandy areas.",
-        "sun": "Full Sun",
-        "planting_time": "March-July",
-        "image": "carrots.jpg",
+        "id": 4,
+        "name": "Dublin Potatoes",
+        "description": "Classic Irish staple - grows perfectly here!",
+        "sun": "Partial Sun",
+        "planting_time": "St. Patrick's Day",
+        "emoji": "🥔",
+        "difficulty": "easy",
         "type": "vegetable"
     },
     {
-        "id": 6,
-        "name": "Fuchsia",
-        "description": "Ireland's unofficial national flower, grows wild in West Cork.",
+        "id": 5,
+        "name": "Balbriggan Blooms",
+        "description": "Fuchsia & hydrangeas love our damp climate.",
         "sun": "Partial Shade",
         "planting_time": "Spring",
-        "image": "fuchsia.jpg",
+        "emoji": "🌸",
+        "difficulty": "easy",
         "type": "flower"
+    },
+    {
+        "id": 6,
+        "name": "Salad Heaven",
+        "description": "Lettuce, spinach & rocket grow fast here!",
+        "sun": "3-4 hours",
+        "planting_time": "March-September",
+        "emoji": "🥗",
+        "difficulty": "easy",
+        "type": "vegetable"
     }
 ]
