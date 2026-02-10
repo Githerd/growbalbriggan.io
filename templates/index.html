@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clonakilty Community Garden - Learn to Garden</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <i class="fas fa-seedling"></i>
+                <span>Clonakilty Community Garden</span>
+            </a>
+            <div class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="/tips">Gardening Tips</a>
+                <a href="/plants">Plants Guide</a>
+                <a href="/seasonal">Seasonal Guide</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Grow Your Garden in Clonakilty</h1>
+            <p>Learn to garden in our small Irish town with local tips, seasonal advice, and community support</p>
+            <a href="#get-started" class="btn">Start Growing Today</a>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="introduction">
+        <div class="container">
+            <h2>Welcome to Gardening in West Cork</h2>
+            <p>Gardening in Clonakilty's unique coastal climate offers both challenges and rewards. Our mild, damp weather is perfect for certain plants that thrive in Irish conditions.</p>
+            <div class="weather-widget">
+                <i class="fas fa-cloud-sun-rain"></i>
+                <span>Typical Clonakilty Weather: Mild & Moist</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Tips -->
+    <section class="quick-tips">
+        <div class="container">
+            <h2>Top Gardening Tips for Beginners</h2>
+            <div class="tips-grid">
+                {% for tip in tips %}
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="{{ tip.icon }}"></i>
+                    </div>
+                    <h3>{{ tip.title }}</h3>
+                    <p>{{ tip.description }}</p>
+                    <span class="season-badge">{{ tip.season }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Plants Section -->
+    <section class="featured-plants" id="get-started">
+        <div class="container">
+            <h2>Plants That Thrive in Clonakilty</h2>
+            <div class="plants-grid">
+                {% for plant in plants %}
+                <div class="plant-card">
+                    <img src="{{ url_for('static', filename='images/' + plant.image) }}" alt="{{ plant.name }}" class="plant-img">
+                    <div class="plant-info">
+                        <h3>{{ plant.name }}</h3>
+                        <p class="plant-desc">{{ plant.description }}</p>
+                        <div class="plant-meta">
+                            <span><i class="fas fa-sun"></i> {{ plant.sun }}</span>
+                            <span><i class="fas fa-calendar"></i> {{ plant.planting_time }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community">
+        <div class="container">
+            <div class="community-content">
+                <h2>Join Our Gardening Community</h2>
+                <p>Connect with local gardeners, share cuttings, and learn from experienced growers in Clonakilty</p>
+                <div class="community-features">
+                    <div class="feature">
+                        <i class="fas fa-users"></i>
+                        <h3>Monthly Meetups</h3>
+                        <p>First Saturday of every month at the Community Centre</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-seedling"></i>
+                        <h3>Seed Exchange</h3>
+                        <p>Swap seeds and plants with local gardeners</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-hands-helping"></i>
+                        <h3>Beginner Workshops</h3>
+                        <p>Free workshops for new gardeners</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Clonakilty Community Garden</h3>
+                    <p>Growing together in our beautiful West Cork town</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="/tips">Gardening Tips</a>
+                    <a href="/plants">Plant Guide</a>
+                    <a href="/seasonal">Seasonal Calendar</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@clongarden.ie</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Community Centre, Clonakilty</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Clonakilty Community Garden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
