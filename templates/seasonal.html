@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Gardening Guide - Clonakilty Community Garden</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional seasonal-specific styles */
+        .seasonal-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('/static/images/seasonal-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 1rem;
+            margin-bottom: 4rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .season-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .season-tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--light-green);
+            border: 2px solid var(--primary-green);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .season-tab.active {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+        
+        .season-tab:hover:not(.active) {
+            background: var(--secondary-green);
+            color: var(--white);
+        }
+        
+        .season-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .season-content.active {
+            display: block;
+        }
+        
+        .current-season-banner {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .seasonal-calendar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .calendar-month {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .month-header {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .month-tasks {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .month-tasks li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-brown);
+            display: flex;
+            align-items: center;
+        }
+        
+        .month-tasks li:before {
+            content: "✓";
+            color: var(--primary-green);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .season-plants {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .season-plant {
+            background: var(--off-white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .weather-note {
+            background: var(--light-green);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            border-left: 4px solid var(--secondary-green);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .seasonal-tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .season-weather {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .weather-stat {
+            text-align: center;
+        }
+        
+        .weather-stat i {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+        
+        .festival-highlight {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: var(--dark-green);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <i class="fas fa-seedling"></i>
+                <span>Clonakilty Community Garden</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/tips">Gardening Tips</a>
+                <a href="/plants">Plants Guide</a>
+                <a href="/seasonal" class="active">Seasonal Guide</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="seasonal-hero">
+            <h1>Seasonal Gardening in Clonakilty</h1>
+            <p>Your month-by-month guide to gardening in West Cork's unique coastal climate</p>
+        </section>
+
+        <!-- Current Season Banner -->
+        <div class="current-season-banner">
+            <h2><i class="fas fa-calendar-alt"></i> Current Season: <span id="current-season">Loading...</span></h2>
+            <p id="season-description">Based on Clonakilty's climate patterns</p>
+        </div>
+
+        <!-- Season Tabs -->
+        <div class="season-tabs">
+            <div class="season-tab active" data-season="spring">Spring <i class="fas fa-seedling"></i></div>
+            <div class="season-tab" data-season="summer">Summer <i class="fas fa-sun"></i></div>
+            <div class="season-tab" data-season="autumn">Autumn <i class="fas fa-leaf"></i></div>
+            <div class="season-tab" data-season="winter">Winter <i class="fas fa-snowflake"></i></div>
+        </div>
+
+        <!-- Spring Content -->
+        <div class="season-content active" id="spring-content">
+            <h2><i class="fas fa-seedling"></i> Spring Gardening (March - May)</h2>
+            <div class="weather-note">
+                <i class="fas fa-info-circle"></i>
+                <strong>Clonakilty Spring Weather:</strong> Average temperature: 8-12°C, Frequent showers, Increasing daylight hours
+            </div>
+
+            <div class="seasonal-calendar">
+                <div class="calendar-month">
+                    <div class="month-header">March</div>
+                    <ul class="month-tasks">
+                        <li>Prepare seed beds as soil warms</li>
+                        <li>Plant early potatoes on St. Patrick's Day</li>
+                        <li>Sow carrots, onions, and peas</li>
+                        <li>Prune roses and fruit bushes</li>
+                        <li>Start tomato seeds indoors</li>
+                    </ul>
+                </div>
+                
+                <div class="calendar-month">
+                    <div class="month-header">April</div>
+                    <ul class="month-tasks">
+                        <li>Plant main crop potatoes</li>
+                        <li>Sow lettuce, spinach, and beetroot</li>
+                        <li>Divide perennial herbs</li>
+                        <li>Watch for late frosts - protect seedlings</li>
+                        <li>Visit Clonakilty Garden Centre's spring sale</li>
+                    </ul>
+                </div>
+                
+                <div class="calendar-month">
+                    <div class="month-header">May</div>
+                    <ul class="month-tasks">
+                        <li>Plant out tomatoes after last frost</li>
+                        <li>Sow beans, sweetcorn, and courgettes</li>
+                        <li>Deadhead spring bulbs</li>
+                        <li>Begin regular weeding routine</li>
+                        <li>Attend May Day plant swap at Community Centre</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Best Plants for Spring in Clonakilty</h3>
+            <div class="season-plants">
+                <div class="season-plant">Potatoes (early varieties)</div>
+                <div class="season-plant">Spring Cabbage</div>
+                <div class="season-plant">Rhubarb (first harvest)</div>
+                <div class="season-plant">Primroses & Daffodils</div>
+                <div class="season-plant">Peas & Broad Beans</div>
+            </div>
+
+            <div class="festival-highlight">
+                <i class="fas fa-calendar-star"></i>
+                <strong>Local Event:</strong> Clonakilty Food Festival - Great time to buy local seeds and plants!
+            </div>
+
+            <h3>Spring Gardening Tips</h3>
+            <div class="seasonal-tips-grid">
+                {% for tip in tips if tip.season == "Spring" %}
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="{{ tip.icon }}"></i>
+                    </div>
+                    <h3>{{ tip.title }}</h3>
+                    <p>{{ tip.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Summer Content -->
+        <div class="season-content" id="summer-content">
+            <h2><i class="fas fa-sun"></i> Summer Gardening (June - August)</h2>
+            <div class="weather-note">
+                <i class="fas fa-info-circle"></i>
+                <strong>Clonakilty Summer Weather:</strong> Average temperature: 15-18°C, Long daylight hours, Occasional warm spells, Atlantic breezes
+            </div>
+
+            <div class="seasonal-calendar">
+                <div class="calendar-month">
+                    <div class="month-header">June</div>
+                    <ul class="month-tasks">
+                        <li>Harvest early potatoes and strawberries</li>
+                        <li>Plant out tender vegetables</li>
+                        <li>Water regularly during dry spells</li>
+                        <li>Net fruit bushes against birds</li>
+                        <li>Succession sow salad leaves</li>
+                    </ul>
+                </div>
+                
+                <div class="calendar-month">
+                    <div class="month-header">July</div>
+                    <ul class="month-tasks">
+                        <li>Harvest peas, beans, and carrots</li>
+                        <li>Water in early morning or evening</li>
+                        <li>Watch for blight on potatoes</li>
+                        <li>Deadhead flowers for continued blooms</li>
+                        <li>Collect seeds from early flowers</li>
+                    </ul>
+                </div>
+                
+                <div class="calendar-month">
+                    <div class="month-header">August</div>
+                    <ul class="month-tasks">
+                        <li>Harvest onions and garlic</li>
+                        <li>Sow winter vegetables (kale, spinach)</li>
+                        <li>Take cuttings of tender perennials</li>
+                        <li>Collect herbs for drying</li>
+                        <li>Water containers daily</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="season-weather">
+                <div class="weather-stat">
+                    <i class="fas fa-tint"></i>
+                    <p>Watering is crucial</p>
+                    <small>Especially in raised beds</small>
+                </div>
+                <div class="weather-stat">
+                    <i class="fas fa-wind"></i>
+                    <p>Atlantic breezes</p>
+                    <small>Help prevent mildew</small>
+                </div>
+                <div class="weather-stat">
+                    <i class="fas fa-cloud-sun"></i>
+                    <p>Long evenings</p>
+                    <small>Perfect for gardening</small>
+                </div>
+            </div>
+
+            <h3>Best Plants for Summer in Clonakilty</h3>
+            <div class="season-plants">
+                <div class="season-plant">Strawberries</div>
+                <div class="season-plant">Tomatoes (in greenhouse)</div>
+                <div class="season-plant">Lettuce & Salad Leaves</div>
+                <div class="season-plant">Fuchsia (in full bloom)</div>
+                <div class="season-plant">Courgettes</div>
+            </div>
+
+            <h3>Summer Gardening Tips</h3>
+            <div class="seasonal-tips-grid">
+                {% for tip in tips if tip.season == "Summer" %}
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="{{ tip.icon }}"></i>
+                    </div>
+                    <h3>{{ tip.title }}</h3>
+                    <p>{{ tip.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Autumn Content -->
+        <div class="season-content" id="autumn-content">
+            <h2><i class="fas fa-leaf"></i> Autumn Gardening (September - November)</h2>
+            <div class="weather-note">
+                <i class="fas fa-info-circle"></i>
+                <strong>Clonakilty Autumn Weather:</strong> Average temperature: 10-14°C, Increasing rainfall, First frosts possible in November, Beautiful autumn colors
+            </div>
+
+            <div class="seasonal-calendar">
+                <div class="calendar-month">
+                    <div class="month-header">September</div>
+                    <ul class="month-tasks">
+                        <li>Harvest main crop potatoes</li>
+                        <li>Plant spring cabbages</li>
+                        <li>Sow green manures on empty beds</li>
+                        <li>Collect apples and pears</li>
+                        <li>Divide herbaceous perennials</li>
+                    </ul>
+                </div>
+                
+                <div class="calendar-month">
+                    <div class="month-header">October</div>
+                    <ul class="month-tasks">
+                        <li>Harvest pumpkins for Halloween</li>
+                        <li>Plant garlic and onion sets</li>
+                        <li>Clear spent vegetable plants</li>
+                        <li>Start composting fallen leaves</li>
+                        <li>Insulate outdoor taps against frost</li>
+                    </ul>
+                </div>
+                
+                <div class="calendar-month">
+                    <div class="month-header">November</div>
+                    <ul class="month-tasks">
+                        <li>Prune fruit trees</li>
+                        <li>Plant bare-root trees and shrubs</li>
+                        <li>Protect tender plants from frost</li>
+                        <li>Clean and store garden tools</li>
+                        <li>Mulch beds with compost</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Best Plants for Autumn in Clonakilty</h3>
+            <div class="season-plants">
+                <div class="season-plant">Apples & Pears</div>
+                <div class="season-plant">Pumpkins & Squash</div>
+                <div class="season-plant">Kale & Swiss Chard</div>
+                <div class="season-plant">Heathers</div>
+                <div class="season-plant">Spring Bulbs (plant now)</div>
+            </div>
+
+            <div class="festival-highlight">
+                <i class="fas fa-ghost"></i>
+                <strong>Local Tradition:</strong> Save your best pumpkins for the Clonakilty Pumpkin Festival!
+            </div>
+
+            <h3>Autumn Gardening Tips</h3>
+            <div class="seasonal-tips-grid">
+                {% for tip in tips if tip.season == "Autumn" %}
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="{{ tip.icon }}"></i>
+                    </div>
+                    <h3>{{ tip.title }}</h3>
+                    <p>{{ tip.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Winter Content -->
+        <div class="season-content" id="winter-content">
+            <h2><i class="fas fa-snowflake"></i> Winter Gardening (December - February)</h2>
+            <div class="weather-note">
+                <i class="fas fa-info-circle"></i>
+                <strong>Clonakilty Winter Weather:</strong> Average temperature: 5-8°C, Highest rainfall, Rare snow but frequent frost, Strong Atlantic storms possible
+            </div>
+
+            <div class="seasonal-calendar">
+                <div class="calendar-month">
+                    <div class="month-header">December</div>
+                    <ul class="month-tasks">
+                        <li>Harvest winter vegetables as needed</li>
+                        <li>Protect plants from winter winds</li>
+                        <li>Plan next year's garden layout</li>
+                        <li>Order seeds for spring</li>
+                        <li>Check stored vegetables regularly</li>
+                    </ul>
+                </div>
+                
+                <div class="calendar-month">
+                    <div class="month-header">January</div>
+                    <ul class="month-tasks">
+                        <li>Prune apple and pear trees</li>
+                        <li>Force rhubarb for early crop</li>
+                        <li>Clean greenhouse and tools</li>
+                        <li>Start chitting seed potatoes</li>
+                        <li>Attend garden planning workshop</li>
+                    </ul>
+                </div>
+                
+                <div class="calendar-month">
+                    <div class="month-header">February</div>
+                    <ul class="month-tasks">
+                        <li>Sow early peas under cloches</li>
+                        <li>Plant bare-root roses</li>
+                        <li>Prepare seed compost</li>
+                        <li>Prune autumn-fruiting raspberries</li>
+                        <li>Visit West Cork Garden Show</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="season-weather">
+                <div class="weather-stat">
+                    <i class="fas fa-umbrella"></i>
+                    <p>High Rainfall</p>
+                    <small>Check drainage</small>
+                </div>
+                <div class="weather-stat">
+                    <i class="fas fa-wind"></i>
+                    <p>Storm Season</p>
+                    <small>Secure structures</small>
+                </div>
+                <div class="weather-stat">
+                    <i class="fas fa-temperature-low"></i>
+                    <p>Mild but damp</p>
+                    <small>Good for overwintering</small>
+                </div>
+            </div>
+
+            <h3>Best Plants for Winter in Clonakilty</h3>
+            <div class="season-plants">
+                <div class="season-plant">Winter Cabbage</div>
+                <div class="season-plant">Leeks</div>
+                <div class="season-plant">Parsnips</div>
+                <div class="season-plant">Winter Heather</div>
+                <div class="season-plant">Winter Pansies</div>
+            </div>
+
+            <h3>Winter Gardening Tips</h3>
+            <div class="seasonal-tips-grid">
+                {% for tip in tips if tip.season == "Winter" %}
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="{{ tip.icon }}"></i>
+                    </div>
+                    <h3>{{ tip.title }}</h3>
+                    <p>{{ tip.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Year-Round Tips -->
+        <section style="margin: 4rem 0; padding: 2rem; background: var(--light-green); border-radius: var(--border-radius);">
+            <h2><i class="fas fa-calendar-check"></i> Year-Round in Clonakilty</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div>
+                    <h3><i class="fas fa-cloud-rain"></i> Rain Management</h3>
+                    <p>Our high rainfall means good drainage is essential. Consider raised beds and adding grit to heavy soil.</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-wind"></i> Wind Protection</h3>
+                    <p>Atlantic winds can damage plants. Use hedges, fences, or windbreaks to create sheltered microclimates.</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-temperature-low"></i> Mild Winters</h3>
+                    <p>Take advantage of our frost-free coastal climate to grow winter vegetables and extend the growing season.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Clonakilty Community Garden</h3>
+                    <p>Growing together in our beautiful West Cork town</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="/">Home</a>
+                    <a href="/tips">Gardening Tips</a>
+                    <a href="/plants">Plant Guide</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@clongarden.ie</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Community Centre, Clonakilty</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Clonakilty Community Garden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Seasonal tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const seasonTabs = document.querySelectorAll('.season-tab');
+            const seasonContents = document.querySelectorAll('.season-content');
+            
+            seasonTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const season = this.dataset.season;
+                    
+                    // Update active tab
+                    seasonTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    seasonContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${season}-content`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Set current season based on month
+            function setCurrentSeason() {
+                const month = new Date().getMonth();
+                let season, description;
+                
+                if (month >= 2 && month <= 4) { // Mar-May
+                    season = 'Spring';
+                    description = 'Time for planting and preparing beds';
+                } else if (month >= 5 && month <= 7) { // Jun-Aug
+                    season = 'Summer';
+                    description = 'Harvest and maintenance season';
+                } else if (month >= 8 && month <= 10) { // Sep-Nov
+                    season = 'Autumn';
+                    description = 'Harvest and prepare for winter';
+                } else { // Dec-Feb
+                    season = 'Winter';
+                    description = 'Planning and protecting plants';
+                }
+                
+                document.getElementById('current-season').textContent = season;
+                document.getElementById('season-description').textContent = description;
+                
+                // Activate corresponding tab
+                seasonTabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.dataset.season === season.toLowerCase()) {
+                        tab.classList.add('active');
+                    }
+                });
+                
+                seasonContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${season.toLowerCase()}-content`) {
+                        content.classList.add('active');
+                    }
+                });
+            }
+            
+            setCurrentSeason();
+            
+            // Add more seasonal data
+            const seasonalData = {
+                spring: {
+                    festivals: ["Clonakilty Food Festival", "May Day Plant Swap"],
+                    specialNotes: "Watch for late frosts in April"
+                },
+                summer: {
+                    festivals: ["Clonakilty Agricultural Show", "Garden Open Days"],
+                    specialNotes: "Water in early morning to prevent mildew"
+                },
+                autumn: {
+                    festivals: ["Pumpkin Festival", "Harvest Festival"],
+                    specialNotes: "Excellent time for planting trees and shrubs"
+                },
+                winter: {
+                    festivals: ["Christmas Market", "Seed Swap Sunday"],
+                    specialNotes: "Protect plants from Atlantic storms"
+                }
+            };
+            
+            // Add festival highlights to each season
+            Object.keys(seasonalData).forEach(season => {
+                const content = document.getElementById(`${season}-content`);
+                if (content) {
+                    const festivals = seasonalData[season].festivals;
+                    const festivalHtml = `
+                        <div class="festival-highlight">
+                            <i class="fas fa-calendar-star"></i>
+                            <strong>Local Events:</strong> ${festivals.join(", ")}
+                        </div>
+                    `;
+                    
+                    // Insert after seasonal-calendar if it exists
+                    const calendar = content.querySelector('.seasonal-calendar');
+                    if (calendar) {
+                        calendar.insertAdjacentHTML('afterend', festivalHtml);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
