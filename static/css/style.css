@@ -414,3 +414,195 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* Add these to your existing style.css file */
+
+/* Seasonal-specific styles */
+.seasonal-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('/static/images/seasonal-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    text-align: center;
+    padding: 6rem 1rem;
+    margin-bottom: 4rem;
+    border-radius: var(--border-radius);
+}
+
+.season-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.season-tab {
+    padding: 0.75rem 1.5rem;
+    background: var(--light-green);
+    border: 2px solid var(--primary-green);
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.season-tab.active {
+    background: var(--primary-green);
+    color: var(--white);
+}
+
+.season-tab:hover:not(.active) {
+    background: var(--secondary-green);
+    color: var(--white);
+}
+
+.season-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.season-content.active {
+    display: block;
+}
+
+.current-season-banner {
+    background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.seasonal-calendar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.calendar-month {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.month-header {
+    background: var(--primary-green);
+    color: white;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.month-tasks {
+    list-style: none;
+    padding: 0;
+}
+
+.month-tasks li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--light-brown);
+    display: flex;
+    align-items: center;
+}
+
+.month-tasks li:before {
+    content: "✓";
+    color: var(--primary-green);
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.season-plants {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.season-plant {
+    background: var(--off-white);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border-left: 4px solid var(--primary-green);
+}
+
+.weather-note {
+    background: var(--light-green);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+    border-left: 4px solid var(--secondary-green);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.seasonal-tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.season-weather {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+}
+
+.weather-stat {
+    text-align: center;
+}
+
+.weather-stat i {
+    font-size: 2rem;
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+}
+
+.festival-highlight {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: var(--dark-green);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 1.5rem 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Responsive adjustments for seasonal page */
+@media (max-width: 768px) {
+    .season-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .season-tab {
+        width: 200px;
+        text-align: center;
+    }
+    
+    .season-weather {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .seasonal-calendar {
+        grid-template-columns: 1fr;
+    }
+}
