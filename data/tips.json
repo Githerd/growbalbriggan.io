@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "title": "Prepare Your Soil",
+        "description": "Irish soil tends to be acidic. Add lime in winter to balance pH levels for spring planting.",
+        "season": "Winter",
+        "icon": "fas fa-mountain",
+        "seasonal": true
+    },
+    {
+        "id": 2,
+        "title": "Drainage is Key",
+        "description": "Clonakilty's rainfall requires raised beds or adding grit to soil for better drainage.",
+        "season": "All Year",
+        "icon": "fas fa-tint",
+        "seasonal": false
+    },
+    {
+        "id": 3,
+        "title": "Wind Protection",
+        "description": "Use hedges or windbreaks to protect plants from Atlantic winds.",
+        "season": "All Year",
+        "icon": "fas fa-wind",
+        "seasonal": false
+    },
+    {
+        "id": 4,
+        "title": "Spring Planting",
+        "description": "Wait until late April to plant tender vegetables after last frosts.",
+        "season": "Spring",
+        "icon": "fas fa-seedling",
+        "seasonal": true
+    },
+    {
+        "id": 5,
+        "title": "Summer Maintenance",
+        "description": "Water in early morning to reduce evaporation and prevent mildew.",
+        "season": "Summer",
+        "icon": "fas fa-sun",
+        "seasonal": true
+    },
+    {
+        "id": 6,
+        "title": "Autumn Harvest",
+        "description": "Harvest root vegetables before heavy autumn rains saturate the ground.",
+        "season": "Autumn",
+        "icon": "fas fa-leaf",
+        "seasonal": true
+    }
+]
