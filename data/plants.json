@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Irish Potatoes",
+        "description": "Thrive in our cool, damp climate. Plant in March-April.",
+        "sun": "Full Sun",
+        "planting_time": "March-April",
+        "image": "potatoes.jpg",
+        "type": "vegetable"
+    },
+    {
+        "id": 2,
+        "name": "Cabbage",
+        "description": "Hardy and perfect for Irish weather. Great for colcannon!",
+        "sun": "Partial Sun",
+        "planting_time": "April-May",
+        "image": "cabbage.jpg",
+        "type": "vegetable"
+    },
+    {
+        "id": 3,
+        "name": "Rhubarb",
+        "description": "Grows well in West Cork. Needs minimal maintenance.",
+        "sun": "Partial Shade",
+        "planting_time": "Autumn/Spring",
+        "image": "rhubarb.jpg",
+        "type": "fruit"
+    },
+    {
+        "id": 4,
+        "name": "Hydrangeas",
+        "description": "Love acidic soil and thrive with our rainfall.",
+        "sun": "Partial Shade",
+        "planting_time": "Spring",
+        "image": "hydrangeas.jpg",
+        "type": "flower"
+    },
+    {
+        "id": 5,
+        "name": "Carrots",
+        "description": "Grow well in deep, stone-free soil. Perfect for Clonakilty's sandy areas.",
+        "sun": "Full Sun",
+        "planting_time": "March-July",
+        "image": "carrots.jpg",
+        "type": "vegetable"
+    },
+    {
+        "id": 6,
+        "name": "Fuchsia",
+        "description": "Ireland's unofficial national flower, grows wild in West Cork.",
+        "sun": "Partial Shade",
+        "planting_time": "Spring",
+        "image": "fuchsia.jpg",
+        "type": "flower"
+    }
+]
