@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GrowBalbriggan - Grow Your Garden in North County Dublin{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <span class="logo-emoji">🌱</span>
+                <span class="logo-text">Grow<span class="logo-highlight">Balbriggan</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="/" {% if request.path == '/' %}class="active"{% endif %}>
+                    <span class="nav-emoji">🏠</span> Home
+                </a>
+                <a href="/tips" {% if request.path == '/tips' %}class="active"{% endif %}>
+                    <span class="nav-emoji">💡</span> Tips
+                </a>
+                <a href="/plants" {% if request.path == '/plants' %}class="active"{% endif %}>
+                    <span class="nav-emoji">🌿</span> Plants
+                </a>
+                <a href="/seasonal" {% if request.path == '/seasonal' %}class="active"{% endif %}>
+                    <span class="nav-emoji">📅</span> Seasonal
+                </a>
+                <a href="/community" {% if request.path == '/community' %}class="active"{% endif %}>
+                    <span class="nav-emoji">👥</span> Community
+                </a>
+                <a href="/contact" {% if request.path == '/contact' %}class="active"{% endif %}>
+                    <span class="nav-emoji">📧</span> Contact
+                </a>
+            </div>
+            <button class="menu-toggle">
+                <span class="menu-emoji">🍃</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div class="mobile-menu">
+        <a href="/"><span class="nav-emoji">🏠</span> Home</a>
+        <a href="/tips"><span class="nav-emoji">💡</span> Tips</a>
+        <a href="/plants"><span class="nav-emoji">🌿</span> Plants</a>
+        <a href="/seasonal"><span class="nav-emoji">📅</span> Seasonal</a>
+        <a href="/community"><span class="nav-emoji">👥</span> Community</a>
+        <a href="/contact"><span class="nav-emoji">📧</span> Contact</a>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-emoji">📬</div>
+                <h2>Stay in the Grow!</h2>
+                <p>Get weekly gardening tips, event updates, and exclusive Balbriggan growing guides</p>
+                <form action="/subscribe" method="POST" class="newsletter-form">
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn btn-sparkle">
+                        <span class="btn-emoji">✨</span> Subscribe
+                    </button>
+                </form>
+                <p class="newsletter-note">Join 500+ Balbriggan gardeners already growing with us!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-emoji">🌱</span>
+                        <span class="logo-text">Grow<span class="logo-highlight">Balbriggan</span></span>
+                    </div>
+                    <p class="footer-tagline">Growing North County Dublin together, one plant at a time! 🌸</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><span class="social-emoji">📸</span></a>
+                        <a href="#" class="social-link"><span class="social-emoji">🐦</span></a>
+                        <a href="#" class="social-link"><span class="social-emoji">📘</span></a>
+                        <a href="#" class="social-link"><span class="social-emoji">🎥</span></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3><span class="footer-emoji">📍</span> Balbriggan Hotspots</h3>
+                    <a href="#"><span class="link-emoji">🌳</span> Bremore Castle Gardens</a>
+                    <a href="#"><span class="link-emoji">🛒</span> Balbriggan Market</a>
+                    <a href="#"><span class="link-emoji">🏖️</span> Coastal Growing Tips</a>
+                    <a href="#"><span class="link-emoji">🎯</span> Local Garden Centres</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3><span class="footer-emoji">🚀</span> Quick Grow</h3>
+                    <a href="/tips"><span class="link-emoji">🌱</span> Beginner's Guide</a>
+                    <a href="/seasonal"><span class="link-emoji">📅</span> This Week's Tasks</a>
+                    <a href="/community"><span class="link-emoji">👥</span> Weekend Meetup</a>
+                    <a href="/plants"><span class="link-emoji">🌿</span> Plant Finder</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3><span class="footer-emoji">💬</span> Get in Touch</h3>
+                    <p><span class="contact-emoji">📧</span> hello@growbalbriggan.ie</p>
+                    <p><span class="contact-emoji">📍</span> Community Garden, Balbriggan</p>
+                    <p><span class="contact-emoji">📱</span> Follow #GrowBalbriggan</p>
+                    <a href="/contact" class="btn btn-small">
+                        <span class="btn-emoji">👋</span> Say Hi!
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-credits">
+                    <p>Made with <span class="heart-emoji">💚</span> in Balbriggan, Co. Dublin</p>
+                    <p class="footer-inspiration">Inspiring growth in North County Dublin since 2024</p>
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Privacy</a> • 
+                    <a href="#">Terms</a> • 
+                    <a href="#">Community Rules</a> • 
+                    <span class="grow-counter">🌻 {{ "1,234" }} Gardens Growing!</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
