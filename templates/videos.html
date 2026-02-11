@@ -1,0 +1,926 @@
+{% extends "base.html" %}
+
+{% block title %}Weekly Gardening Classes - GrowBalbriggan | Video Lessons for North Dublin Gardeners{% endblock %}
+
+{% block description %}Watch free weekly gardening video classes from Balbriggan experts. Learn to grow vegetables, herbs, and flowers in North County Dublin's unique climate.{% endblock %}
+
+{% block keywords %}gardening videos, online gardening classes, Balbriggan gardening lessons, vegetable growing tutorials, Ireland gardening videos{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="videos-hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-emojis">🎥🌱✨</div>
+            <h1>Weekly Gardening Classes</h1>
+            <p class="hero-subtitle">Free video lessons from Balbriggan gardening experts. Learn, grow, and connect!</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">🎬</div>
+                    <div class="stat-text">Weekly New Videos</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">⏱️</div>
+                    <div class="stat-text">15-30 Minute Lessons</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">🎯</div>
+                    <div class="stat-text">Beginner Friendly</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Video -->
+<section class="featured-video">
+    <div class="container">
+        <div class="section-header">
+            <h2><span class="header-emoji">🔥</span> This Week's Featured Class</h2>
+            <p class="section-subtitle">New video every Friday at 6 PM</p>
+        </div>
+        
+        {% if videos[0] %}
+        <div class="video-player">
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/{{ videos[0].youtube_id }}" 
+                    title="{{ videos[0].title }}"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-info">
+                <div class="video-meta">
+                    <span class="meta-badge new">NEW THIS WEEK</span>
+                    <span class="meta-item">
+                        <span class="meta-emoji">📅</span> {{ videos[0].date }}
+                    </span>
+                    <span class="meta-item">
+                        <span class="meta-emoji">⏱️</span> {{ videos[0].duration }}
+                    </span>
+                    <span class="meta-item">
+                        <span class="meta-emoji">👩‍🏫</span> {{ videos[0].instructor }}
+                    </span>
+                </div>
+                <h3>{{ videos[0].title }}</h3>
+                <p class="video-description">{{ videos[0].description }}</p>
+                
+                <div class="video-actions">
+                    <button class="btn" onclick="location.href='https://youtube.com/@GrowBalbriggan'">
+                        <span class="btn-emoji">▶️</span> Subscribe on YouTube
+                    </button>
+                    <button class="btn btn-secondary" id="reminder-btn">
+                        <span class="btn-emoji">🔔</span> Set Weekly Reminder
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Video Library -->
+<section class="video-library">
+    <div class="container">
+        <div class="library-header">
+            <h2><span class="header-emoji">📚</span> Video Class Library</h2>
+            
+            <div class="library-filters">
+                <button class="filter-btn active" data-filter="all">All Classes</button>
+                <button class="filter-btn" data-filter="beginner">🌱 Beginner</button>
+                <button class="filter-btn" data-filter="intermediate">🌿 Intermediate</button>
+                <button class="filter-btn" data-filter="advanced">🌳 Advanced</button>
+                <button class="filter-btn" data-filter="seasonal">📅 Seasonal</button>
+            </div>
+        </div>
+        
+        <div class="videos-grid">
+            {% for video in videos %}
+            <div class="video-card" data-difficulty="{{ video.difficulty }}" data-tags="{{ video.tags|join(' ') }}">
+                <div class="video-thumbnail">
+                    <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
+                    <div class="video-duration">{{ video.duration }}</div>
+                    <div class="difficulty-badge {{ video.difficulty }}">{{ video.difficulty|capitalize }}</div>
+                </div>
+                
+                <div class="video-card-content">
+                    <div class="video-meta-small">
+                        <span class="meta-item">
+                            <span class="meta-emoji">📅</span> {{ video.date }}
+                        </span>
+                        <span class="meta-item">
+                            <span class="meta-emoji">👩‍🏫</span> {{ video.instructor }}
+                        </span>
+                    </div>
+                    
+                    <h3>{{ video.title }}</h3>
+                    <p class="video-description-small">{{ video.description }}</p>
+                    
+                    <div class="video-tags">
+                        {% for tag in video.tags %}
+                        <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    
+                    <a href="https://www.youtube.com/watch?v={{ video.youtube_id }}" 
+                       target="_blank" 
+                       class="watch-btn">
+                        <span class="btn-emoji">▶️</span> Watch Now
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Upcoming Classes -->
+        <div class="upcoming-classes">
+            <h3><span class="header-emoji">📅</span> Upcoming Classes</h3>
+            <div class="upcoming-list">
+                <div class="upcoming-item">
+                    <div class="upcoming-date">
+                        <span class="date-emoji">📅</span>
+                        <span class="date-text">Next Friday</span>
+                    </div>
+                    <div class="upcoming-details">
+                        <h4>Container Gardening for Small Spaces</h4>
+                        <p>Perfect for balconies and patios in Balbriggan apartments</p>
+                        <div class="upcoming-tags">
+                            <span class="tag">containers</span>
+                            <span class="tag">balcony</span>
+                            <span class="tag">beginners</span>
+                        </div>
+                    </div>
+                    <button class="reminder-btn" data-date="next-friday">
+                        <span class="btn-emoji">🔔</span> Remind Me
+                    </button>
+                </div>
+                
+                <div class="upcoming-item">
+                    <div class="upcoming-date">
+                        <span class="date-emoji">📅</span>
+                        <span class="date-text">In 2 Weeks</span>
+                    </div>
+                    <div class="upcoming-details">
+                        <h4>Coastal Soil Preparation</h4>
+                        <p>Getting Balbriggan's unique soil ready for planting</p>
+                        <div class="upcoming-tags">
+                            <span class="tag">soil</span>
+                            <span class="tag">preparation</span>
+                            <span class="tag">coastal</span>
+                        </div>
+                    </div>
+                    <button class="reminder-btn" data-date="two-weeks">
+                        <span class="btn-emoji">🔔</span> Remind Me
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Live Events -->
+<section class="live-events">
+    <div class="container">
+        <div class="live-header">
+            <h2><span class="header-emoji">🎪</span> Live Q&A Sessions</h2>
+            <p class="section-subtitle">Ask your gardening questions directly to our experts</p>
+        </div>
+        
+        <div class="live-cards">
+            <div class="live-card">
+                <div class="live-badge">LIVE NEXT</div>
+                <div class="live-content">
+                    <div class="live-emoji">🎤</div>
+                    <h3>Saturday Gardeners' Q&A</h3>
+                    <div class="live-details">
+                        <span class="detail-item">
+                            <span class="detail-emoji">📅</span> This Saturday
+                        </span>
+                        <span class="detail-item">
+                            <span class="detail-emoji">⏰</span> 10:00 AM
+                        </span>
+                        <span class="detail-item">
+                            <span class="detail-emoji">📍</span> YouTube Live
+                        </span>
+                    </div>
+                    <p>Bring your gardening questions! Live from the Balbriggan Community Garden</p>
+                    <a href="#" class="btn">
+                        <span class="btn-emoji">📱</span> Set Reminder
+                    </a>
+                </div>
+            </div>
+            
+            <div class="live-card">
+                <div class="live-badge">MONTHLY</div>
+                <div class="live-content">
+                    <div class="live-emoji">👨‍🌾</div>
+                    <h3>Expert Workshop Live</h3>
+                    <div class="live-details">
+                        <span class="detail-item">
+                            <span class="detail-emoji">📅</span> Last Friday of Month
+                        </span>
+                        <span class="detail-item">
+                            <span class="detail-emoji">⏰</span> 7:00 PM
+                        </span>
+                        <span class="detail-item">
+                            <span class="detail-emoji">👩‍🏫</span> Guest Expert
+                        </span>
+                    </div>
+                    <p>In-depth workshop with special gardening guests</p>
+                    <a href="#" class="btn">
+                        <span class="btn-emoji">📅</span> View Schedule
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Tips -->
+<section class="quick-tips">
+    <div class="container">
+        <h2><span class="header-emoji">💡</span> Quick Gardening Tips</h2>
+        
+        <div class="tips-grid">
+            {% for tip in tips %}
+            <div class="tip-card">
+                <div class="tip-emoji">{{ tip.emoji }}</div>
+                <h3>{{ tip.title }}</h3>
+                <p>{{ tip.description }}</p>
+            </div>
+            {% endfor %}
+            
+            <div class="tip-card cta-tip">
+                <div class="tip-emoji">🎬</div>
+                <h3>Missed a Class?</h3>
+                <p>All videos are available on our YouTube channel for free!</p>
+                <a href="https://youtube.com/@GrowBalbriggan" target="_blank" class="btn btn-small">
+                    <span class="btn-emoji">▶️</span> Watch Now
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Download Resources -->
+<section class="resources">
+    <div class="container">
+        <h2><span class="header-emoji">📥</span> Free Downloadable Resources</h2>
+        
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-emoji">📝</div>
+                <h3>Class Notes & Guides</h3>
+                <p>Printable notes for each video class</p>
+                <a href="#" class="download-btn">
+                    <span class="btn-emoji">⬇️</span> Download PDF
+                </a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-emoji">📅</div>
+                <h3>Seasonal Planting Calendar</h3>
+                <p>What to plant each month in Balbriggan</p>
+                <a href="#" class="download-btn">
+                    <span class="btn-emoji">⬇️</span> Download Calendar
+                </a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-emoji">🛒</div>
+                <h3>Local Suppliers List</h3>
+                <p>Where to buy plants & supplies in North Dublin</p>
+                <a href="#" class="download-btn">
+                    <span class="btn-emoji">⬇️</span> Get List
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Videos Hero */
+.videos-hero {
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+    color: var(--white);
+    padding: 4rem 1rem;
+    text-align: center;
+}
+
+.hero-emojis {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+/* Featured Video */
+.featured-video {
+    padding: 4rem 0;
+    background: var(--off-white);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header-emoji {
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+.video-player {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-heavy);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-info {
+    padding: 2rem;
+}
+
+.video-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.meta-badge {
+    background: var(--gradient-blossom);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-round);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.meta-badge.new {
+    background: var(--sunny-yellow);
+    color: var(--text-dark);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-light);
+}
+
+.video-description {
+    margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.video-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Video Library */
+.video-library {
+    padding: 4rem 0;
+}
+
+.library-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.library-filters {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    background: var(--light-gray);
+    border: 2px solid var(--light-gray);
+    border-radius: var(--border-radius-round);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-btn.active {
+    background: var(--primary-green);
+    color: var(--white);
+    border-color: var(--primary-green);
+}
+
+.filter-btn:hover:not(.active) {
+    border-color: var(--primary-green);
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.video-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.video-thumbnail {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+}
+
+.difficulty-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+.difficulty-badge.beginner {
+    background: var(--primary-green);
+}
+
+.difficulty-badge.intermediate {
+    background: var(--accent-teal);
+}
+
+.difficulty-badge.advanced {
+    background: var(--text-dark);
+}
+
+.video-card-content {
+    padding: 1.5rem;
+}
+
+.video-meta-small {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.video-description-small {
+    color: var(--text-light);
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.video-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: var(--light-gray);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-round);
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.watch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-green);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius-round);
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.watch-btn:hover {
+    background: var(--dark-green);
+    transform: scale(1.05);
+}
+
+/* Upcoming Classes */
+.upcoming-classes {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+}
+
+.upcoming-list {
+    margin-top: 1.5rem;
+}
+
+.upcoming-item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.upcoming-date {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.date-emoji {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.upcoming-details {
+    flex: 1;
+}
+
+.upcoming-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.reminder-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--gradient-ocean);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-round);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.reminder-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Live Events */
+.live-events {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+    color: var(--white);
+}
+
+.live-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.live-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.live-badge {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--sunny-yellow);
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-round);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.live-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.live-details {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Quick Tips */
+.quick-tips {
+    padding: 4rem 0;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tip-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    transition: transform 0.3s;
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+}
+
+.tip-card.cta-tip {
+    background: var(--gradient-blossom);
+    color: var(--white);
+}
+
+.tip-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Resources */
+.resources {
+    padding: 4rem 0;
+    background: var(--off-white);
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.resource-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow-light);
+}
+
+.resource-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-green);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius-round);
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.download-btn:hover {
+    background: var(--dark-green);
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .library-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .library-filters {
+        justify-content: center;
+    }
+    
+    .upcoming-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .live-details {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .hero-stats {
+        gap: 1.5rem;
+    }
+    
+    .video-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .videos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .live-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Video filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const videoCards = document.querySelectorAll('.video-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filter = this.dataset.filter;
+            
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter videos
+            videoCards.forEach(card => {
+                if (filter === 'all' || card.dataset.difficulty === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // Reminder buttons
+    const reminderBtns = document.querySelectorAll('#reminder-btn, .reminder-btn');
+    reminderBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const date = this.dataset.date || 'weekly';
+            
+            if (navigator.share) {
+                // Use Web Share API if available
+                navigator.share({
+                    title: 'GrowBalbriggan Class Reminder',
+                    text: `Reminder for ${date} gardening class!`,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback to prompt
+                alert(`✅ Reminder set for ${date} gardening class!\n\nWe'll remind you before the class starts.`);
+            }
+        });
+    });
+    
+    // YouTube subscribe tracking
+    const ytButtons = document.querySelectorAll('a[href*="youtube.com"]');
+    ytButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            console.log('YouTube link clicked:', this.href);
+            // Add analytics tracking here
+        });
+    });
+    
+    // Smooth scroll for video cards
+    videoCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (!e.target.closest('a')) {
+                const ytLink = this.querySelector('a[href*="youtube.com"]');
+                if (ytLink) {
+                    ytLink.click();
+                }
+            }
+        });
+    });
+    
+    // Add loading animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .video-card {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
+{% endblock %}
