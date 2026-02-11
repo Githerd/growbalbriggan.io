@@ -93,41 +93,48 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Newsletter Signup -->
-    <section class="newsletter" aria-label="Newsletter signup">
-        <div class="container">
-            <div class="newsletter-content">
-                <div class="newsletter-emoji">📬</div>
-                <h2>Stay in the Grow!</h2>
-                <p>Get weekly gardening tips, video class updates, and exclusive Balbriggan growing guides</p>
-                <form action="/subscribe" method="POST" class="newsletter-form">
-                    <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
-                    <button type="submit" class="btn btn-sparkle">
-                        <span class="btn-emoji">✨</span> Subscribe
-                    </button>
-                </form>
-                <p class="newsletter-note">Join 500+ Balbriggan gardeners already growing with us!</p>
-            </div>
-        </div>
-    </section>
+<!-- In your base.html template, update these sections: -->
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <span class="logo-emoji">🌱</span>
-                        <span class="logo-text">Grow<span class="logo-highlight">Balbriggan</span></span>
-                    </div>
-                    <p class="footer-tagline">Growing North County Dublin together, one plant at a time! 🌸</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Instagram"><span class="social-emoji">📸</span></a>
-                        <a href="#" class="social-link" aria-label="Twitter"><span class="social-emoji">🐦</span></a>
-                        <a href="#" class="social-link" aria-label="Facebook"><span class="social-emoji">📘</span></a>
-                        <a href="https://youtube.com/@GrowBalbriggan" class="social-link" aria-label="YouTube"><span class="social-emoji">🎥</span></a>
-                    </div>
+<!-- Newsletter section -->
+<section class="newsletter" aria-label="Newsletter signup">
+    <div class="container">
+        <div class="newsletter-content">
+            <div class="newsletter-emoji">📬</div>
+            <!-- Updated h2 with span for "Grow" -->
+            <h2>Stay in the <span class="newsletter-grow">Grow</span>!</h2>
+            <p>Get weekly gardening tips, video class updates, and exclusive Balbriggan growing guides</p>
+            <form action="/subscribe" method="POST" class="newsletter-form">
+                <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+                <button type="submit" class="btn btn-sparkle">
+                    <span class="btn-emoji">✨</span> Subscribe
+                </button>
+            </form>
+            <p class="newsletter-note">Join 500+ Balbriggan gardeners already growing with us!</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer section -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <!-- Updated footer logo -->
+                <div class="footer-logo">
+                    <span class="logo-emoji">🌱</span>
+                    <!-- Updated span for "Grow" -->
+                    <span class="logo-text">
+                        <span class="logo-highlight-black">Grow</span><span class="logo-balbriggan">Balbriggan</span>
+                    </span>
                 </div>
+                <p class="footer-tagline">Growing North County Dublin together, one plant at a time! 🌸</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Instagram"><span class="social-emoji">📸</span></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><span class="social-emoji">🐦</span></a>
+                    <a href="#" class="social-link" aria-label="Facebook"><span class="social-emoji">📘</span></a>
+                    <a href="https://youtube.com/@GrowBalbriggan" class="social-link" aria-label="YouTube"><span class="social-emoji">🎥</span></a>
+                </div>
+            </div>
                 
                 <div class="footer-section">
                     <h3><span class="footer-emoji">📍</span> Balbriggan Hotspots</h3>
