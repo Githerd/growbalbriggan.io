@@ -45,8 +45,8 @@
         <div class="video-player">
             <div class="video-container">
                 <iframe 
-                    src="https://www.youtube.com/embed/{{ videos[0].youtube_id }}" 
-                    title="{{ videos[0].title }}"
+                    src="https://www.youtube.com/shorts/-jB5dh575Wg" 
+                    title="Cutting - Rosemary"
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
@@ -90,90 +90,279 @@
             
             <div class="library-filters">
                 <button class="filter-btn active" data-filter="all">All Classes</button>
-                <button class="filter-btn" data-filter="beginner">🌱 Beginner</button>
-                <button class="filter-btn" data-filter="intermediate">🌿 Intermediate</button>
-                <button class="filter-btn" data-filter="advanced">🌳 Advanced</button>
-                <button class="filter-btn" data-filter="seasonal">📅 Seasonal</button>
+                <button class="filter-btn" data-filter="seeding">🌱 Seeding</button>
+                <button class="filter-btn" data-filter="repotting">🔄 Repotting</button>
+                <button class="filter-btn" data-filter="cutting">✂️ Cutting</button>
+                <button class="filter-btn" data-filter="beginner">🎯 Beginner</button>
             </div>
         </div>
         
         <div class="videos-grid">
-            {% for video in videos %}
-            <div class="video-card" data-difficulty="{{ video.difficulty }}" data-tags="{{ video.tags|join(' ') }}">
+            <!-- Video 1: Tomatoes Seeding -->
+            <div class="video-card" data-difficulty="beginner" data-tags="seeding tomatoes vegetables spring">
                 <div class="video-thumbnail">
-                    <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
-                    <div class="video-duration">{{ video.duration }}</div>
-                    <div class="difficulty-badge {{ video.difficulty }}">{{ video.difficulty|capitalize }}</div>
+                    <img src="https://img.youtube.com/vi/PnggZv73dMM/hqdefault.jpg" alt="Seeding Tomatoes in Balbriggan">
+                    <div class="video-duration">0:58</div>
+                    <div class="difficulty-badge beginner">Beginner</div>
+                    <div class="video-action-badge seeding">🌱 Seeding</div>
                 </div>
                 
                 <div class="video-card-content">
                     <div class="video-meta-small">
                         <span class="meta-item">
-                            <span class="meta-emoji">📅</span> {{ video.date }}
+                            <span class="meta-emoji">📅</span> Spring Task
                         </span>
                         <span class="meta-item">
-                            <span class="meta-emoji">👩‍🏫</span> {{ video.instructor }}
+                            <span class="meta-emoji">⏰</span> 0:58
                         </span>
                     </div>
                     
-                    <h3>{{ video.title }}</h3>
-                    <p class="video-description-small">{{ video.description }}</p>
+                    <h3>Seeding Tomatoes for Balbriggan 🍅</h3>
+                    <p class="video-description-small">Learn how to start tomato seeds indoors for our coastal climate. Perfect timing for spring planting!</p>
                     
                     <div class="video-tags">
-                        {% for tag in video.tags %}
-                        <span class="tag">{{ tag }}</span>
-                        {% endfor %}
+                        <span class="tag">tomatoes</span>
+                        <span class="tag">seeding</span>
+                        <span class="tag">spring</span>
+                        <span class="tag">indoor</span>
                     </div>
                     
-                    <a href="https://www.youtube.com/watch?v={{ video.youtube_id }}" 
+                    <div class="video-benefits">
+                        <span class="benefit">🌡️ Start indoors early</span>
+                        <span class="benefit">🌊 Coastal climate tips</span>
+                    </div>
+                    
+                    <a href="https://www.youtube.com/shorts/PnggZv73dMM" 
                        target="_blank" 
                        class="watch-btn">
-                        <span class="btn-emoji">▶️</span> Watch Now
+                        <span class="btn-emoji">▶️</span> Watch Tutorial
                     </a>
                 </div>
             </div>
-            {% endfor %}
+            
+            <!-- Video 2: Carrots Seeding -->
+            <div class="video-card" data-difficulty="beginner" data-tags="seeding carrots root-vegetables easy">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/N-V3loV3gYA/hqdefault.jpg" alt="Seeding Carrots in Coastal Soil">
+                    <div class="video-duration">0:59</div>
+                    <div class="difficulty-badge beginner">Beginner</div>
+                    <div class="video-action-badge seeding">🌱 Seeding</div>
+                </div>
+                
+                <div class="video-card-content">
+                    <div class="video-meta-small">
+                        <span class="meta-item">
+                            <span class="meta-emoji">📅</span> March-May
+                        </span>
+                        <span class="meta-item">
+                            <span class="meta-emoji">⏰</span> 0:59
+                        </span>
+                    </div>
+                    
+                    <h3>Seeding Carrots in Coastal Soil 🥕</h3>
+                    <p class="video-description-small">Direct sowing carrots in Balbriggan's sandy soil. Get straight, sweet carrots every time!</p>
+                    
+                    <div class="video-tags">
+                        <span class="tag">carrots</span>
+                        <span class="tag">seeding</span>
+                        <span class="tag">root-vegetables</span>
+                        <span class="tag">direct-sow</span>
+                    </div>
+                    
+                    <div class="video-benefits">
+                        <span class="benefit">🏖️ Sandy soil technique</span>
+                        <span class="benefit">📏 Proper spacing guide</span>
+                    </div>
+                    
+                    <a href="https://www.youtube.com/shorts/N-V3loV3gYA" 
+                       target="_blank" 
+                       class="watch-btn">
+                        <span class="btn-emoji">▶️</span> Watch Tutorial
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Video 3: Repotting Peas -->
+            <div class="video-card" data-difficulty="intermediate" data-tags="repotting peas legumes climbing">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/Idv5MSQlb08/hqdefault.jpg" alt="Repotting Peas for Better Growth">
+                    <div class="video-duration">0:58</div>
+                    <div class="difficulty-badge intermediate">Intermediate</div>
+                    <div class="video-action-badge repotting">🔄 Repotting</div>
+                </div>
+                
+                <div class="video-card-content">
+                    <div class="video-meta-small">
+                        <span class="meta-item">
+                            <span class="meta-emoji">📅</span> April-June
+                        </span>
+                        <span class="meta-item">
+                            <span class="meta-emoji">⏰</span> 0:58
+                        </span>
+                    </div>
+                    
+                    <h3>Repotting Peas for Maximum Yield 🌱</h3>
+                    <p class="video-description-small">When and how to transplant pea seedlings in Balbriggan. Get more peas from each plant!</p>
+                    
+                    <div class="video-tags">
+                        <span class="tag">peas</span>
+                        <span class="tag">repotting</span>
+                        <span class="tag">legumes</span>
+                        <span class="tag">transplanting</span>
+                    </div>
+                    
+                    <div class="video-benefits">
+                        <span class="benefit">🌱 Healthy root development</span>
+                        <span class="benefit">📈 Increased yield tips</span>
+                    </div>
+                    
+                    <a href="https://www.youtube.com/shorts/Idv5MSQlb08" 
+                       target="_blank" 
+                       class="watch-btn">
+                        <span class="btn-emoji">▶️</span> Watch Tutorial
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Video 4: Rosemary Cutting -->
+            <div class="video-card" data-difficulty="intermediate" data-tags="cutting rosemary herbs propagation">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/-jB5dh575Wg/hqdefault.jpg" alt="Taking Rosemary Cuttings">
+                    <div class="video-duration">0:59</div>
+                    <div class="difficulty-badge intermediate">Intermediate</div>
+                    <div class="video-action-badge cutting">✂️ Cutting</div>
+                </div>
+                
+                <div class="video-card-content">
+                    <div class="video-meta-small">
+                        <span class="meta-item">
+                            <span class="meta-emoji">📅</span> All Year
+                        </span>
+                        <span class="meta-item">
+                            <span class="meta-emoji">⏰</span> 0:59
+                        </span>
+                    </div>
+                    
+                    <h3>Taking Rosemary Cuttings 🌿</h3>
+                    <p class="video-description-small">Propagate rosemary from cuttings - perfect for Balbriggan's coastal herb gardens. Free plants!</p>
+                    
+                    <div class="video-tags">
+                        <span class="tag">rosemary</span>
+                        <span class="tag">cutting</span>
+                        <span class="tag">herbs</span>
+                        <span class="tag">propagation</span>
+                    </div>
+                    
+                    <div class="video-benefits">
+                        <span class="benefit">🌊 Salt-tolerant variety</span>
+                        <span class="benefit">💧 Rooting success tips</span>
+                    </div>
+                    
+                    <a href="https://www.youtube.com/shorts/-jB5dh575Wg" 
+                       target="_blank" 
+                       class="watch-btn">
+                        <span class="btn-emoji">▶️</span> Watch Tutorial
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seasonal Tasks -->
+        <div class="seasonal-tasks">
+            <h3><span class="header-emoji">📅</span> This Month's Key Tasks in Balbriggan</h3>
+            
+            <div class="task-grid">
+                <div class="task-card">
+                    <div class="task-emoji">🌱</div>
+                    <h4>Start Tomato Seeds</h4>
+                    <p>Indoor seeding for early harvest</p>
+                    <div class="task-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                        <span class="progress-text">80% done this month</span>
+                    </div>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-emoji">🥕</div>
+                    <h4>Sow Carrots Directly</h4>
+                    <p>Perfect for our sandy coastal soil</p>
+                    <div class="task-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                        <span class="progress-text">60% done this month</span>
+                    </div>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-emoji">🌿</div>
+                    <h4>Take Herb Cuttings</h4>
+                    <p>Rosemary, thyme, sage propagation</p>
+                    <div class="task-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%"></div>
+                        </div>
+                        <span class="progress-text">40% done this month</span>
+                    </div>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-emoji">🔄</div>
+                    <h4>Repot Seedlings</h4>
+                    <p>Peas, beans, and other legumes</p>
+                    <div class="task-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                        <span class="progress-text">70% done this month</span>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- Upcoming Classes -->
         <div class="upcoming-classes">
-            <h3><span class="header-emoji">📅</span> Upcoming Classes</h3>
+            <h3><span class="header-emoji">📅</span> Upcoming Live Classes</h3>
             <div class="upcoming-list">
                 <div class="upcoming-item">
                     <div class="upcoming-date">
                         <span class="date-emoji">📅</span>
-                        <span class="date-text">Next Friday</span>
+                        <span class="date-text">This Saturday</span>
                     </div>
                     <div class="upcoming-details">
-                        <h4>Container Gardening for Small Spaces</h4>
-                        <p>Perfect for balconies and patios in Balbriggan apartments</p>
+                        <h4>Live Q&A: Spring Seeding Techniques</h4>
+                        <p>Ask questions about tomatoes, carrots, and other spring vegetables</p>
                         <div class="upcoming-tags">
-                            <span class="tag">containers</span>
-                            <span class="tag">balcony</span>
-                            <span class="tag">beginners</span>
+                            <span class="tag">live</span>
+                            <span class="tag">q&a</span>
+                            <span class="tag">seeding</span>
+                            <span class="tag">spring</span>
                         </div>
                     </div>
-                    <button class="reminder-btn" data-date="next-friday">
-                        <span class="btn-emoji">🔔</span> Remind Me
+                    <button class="reminder-btn" data-date="saturday">
+                        <span class="btn-emoji">🔔</span> Set Reminder
                     </button>
                 </div>
                 
                 <div class="upcoming-item">
                     <div class="upcoming-date">
                         <span class="date-emoji">📅</span>
-                        <span class="date-text">In 2 Weeks</span>
+                        <span class="date-text">Next Week</span>
                     </div>
                     <div class="upcoming-details">
-                        <h4>Coastal Soil Preparation</h4>
-                        <p>Getting Balbriggan's unique soil ready for planting</p>
+                        <h4>Herb Propagation Workshop</h4>
+                        <p>Learn cutting techniques for rosemary, mint, and other herbs</p>
                         <div class="upcoming-tags">
-                            <span class="tag">soil</span>
-                            <span class="tag">preparation</span>
-                            <span class="tag">coastal</span>
+                            <span class="tag">workshop</span>
+                            <span class="tag">herbs</span>
+                            <span class="tag">propagation</span>
+                            <span class="tag">hands-on</span>
                         </div>
                     </div>
-                    <button class="reminder-btn" data-date="two-weeks">
-                        <span class="btn-emoji">🔔</span> Remind Me
+                    <button class="reminder-btn" data-date="next-week">
+                        <span class="btn-emoji">🔔</span> Set Reminder
                     </button>
                 </div>
             </div>
@@ -194,20 +383,20 @@
                 <div class="live-badge">LIVE NEXT</div>
                 <div class="live-content">
                     <div class="live-emoji">🎤</div>
-                    <h3>Saturday Gardeners' Q&A</h3>
+                    <h3>Wednesday Gardeners' Q&A</h3>
                     <div class="live-details">
                         <span class="detail-item">
-                            <span class="detail-emoji">📅</span> This Saturday
+                            <span class="detail-emoji">📅</span> This Wednesday
                         </span>
                         <span class="detail-item">
-                            <span class="detail-emoji">⏰</span> 10:00 AM
+                            <span class="detail-emoji">⏰</span> 10:30 AM
                         </span>
                         <span class="detail-item">
                             <span class="detail-emoji">📍</span> YouTube Live
                         </span>
                     </div>
                     <p>Bring your gardening questions! Live from the Balbriggan Community Garden</p>
-                    <a href="#" class="btn">
+                    <a href="https://www.youtube.com/@GrowBalbriggan" class="btn">
                         <span class="btn-emoji">📱</span> Set Reminder
                     </a>
                 </div>
@@ -220,18 +409,16 @@
                     <h3>Expert Workshop Live</h3>
                     <div class="live-details">
                         <span class="detail-item">
-                            <span class="detail-emoji">📅</span> Last Friday of Month
+                            <span class="detail-emoji">📅</span> Every Wednesday at Cairde
                         </span>
                         <span class="detail-item">
-                            <span class="detail-emoji">⏰</span> 7:00 PM
+                            <span class="detail-emoji">⏰</span> 10:30 PM
                         </span>
                         <span class="detail-item">
                             <span class="detail-emoji">👩‍🏫</span> Guest Expert
                         </span>
                     </div>
                     <p>In-depth workshop with special gardening guests</p>
-                    <a href="#" class="btn">
-                        <span class="btn-emoji">📅</span> View Schedule
                     </a>
                 </div>
             </div>
