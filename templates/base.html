@@ -3,146 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %}<title>GrowBalbriggan - Grow Your Garden in North County Dublin</title>{% endblock %}
+    <title>{% block title %}GrowBalbriggan - Grow Your Garden in North County Dublin{% endblock %}</title>
     
     <!-- Meta Description & Keywords -->
     <meta name="description" content="{% block description %}Learn gardening in Balbriggan, North Dublin. Weekly video classes, seasonal tips, plant guides, and community gardening events.{% endblock %}">
     <meta name="keywords" content="{% block keywords %}Balbriggan gardening, Dublin gardening, vegetable growing, community garden, gardening classes, Ireland gardening, beginner gardening{% endblock %}">
-    <meta name="author" content="GrowBalbriggan">
-    <meta name="robots" content="index, follow">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="GrowBalbriggan">
-    <meta property="og:title" content="{% block og_title %}GrowBalbriggan - Gardening in North County Dublin{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Learn gardening in Balbriggan, North Dublin. Weekly video classes, seasonal tips, plant guides, and community gardening events.{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='images/growbalbriggan-social.jpg', _external=True) }}{% endblock %}">
-    <meta property="og:url" content="{{ request.url if request else '' }}">
-    <meta property="og:locale" content="en_IE">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@GrowBalbriggan">
-    <meta name="twitter:creator" content="@GrowBalbriggan">
-    <meta name="twitter:title" content="{% block twitter_title %}GrowBalbriggan - Gardening in North County Dublin{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Learn gardening in Balbriggan, North Dublin. Weekly video classes, seasonal tips, plant guides, and community gardening events.{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{{ url_for('static', filename='images/growbalbriggan-social.jpg', _external=True) }}{% endblock %}">
-
-    <!-- Favicon -->
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
-    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
-    
-    <!-- Preconnect to external resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <!-- Favicon - Simple browser icon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/growbalbriggan-logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/growbalbriggan-logo.png') }}" type="image/png">
     
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
-    <!-- Main Stylesheet with cache busting -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ config.get('VERSION', '1.0.0') }}">
-    
-    <!-- Critical CSS -->
+    <!-- Mobile Navigation CSS -->
     <style>
-        /* CSS Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* CSS Variables */
         :root {
             --primary-green: #2E7D32;
             --dark-green: #1B5E20;
             --light-green: #E8F5E9;
             --accent-teal: #00796B;
-            --secondary-green: #388E3C;
             --white: #FFFFFF;
             --off-white: #F5F5F5;
             --light-gray: #EEEEEE;
-            --medium-gray: #E0E0E0;
             --text-dark: #333333;
             --text-light: #757575;
-            --sunny-yellow: #FFB300;
-            --gradient-blossom: linear-gradient(135deg, #FF8A65, #FFB74D);
-            --gradient-ocean: linear-gradient(135deg, #0288D1, #26C6DA);
             --border-radius: 12px;
             --border-radius-round: 30px;
             --shadow-light: 0 2px 8px rgba(0,0,0,0.1);
-            --shadow-medium: 0 4px 12px rgba(0,0,0,0.15);
             --shadow-heavy: 0 8px 24px rgba(0,0,0,0.2);
             --header-height: 70px;
-            --transition-speed: 0.3s;
         }
 
-        /* Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
             line-height: 1.6;
-            overflow-x: hidden;
-            background-color: var(--white);
+            background: var(--white);
         }
-
+        
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Skip Link - Accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--primary-green);
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 0 0 var(--border-radius) 0;
-            z-index: 1002;
-            transition: top 0.3s;
-        }
-
-        .skip-link:focus {
-            top: 0;
-            outline: 2px solid var(--sunny-yellow);
-        }
-
-        /* Visually Hidden Class */
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: -1px;
-            padding: 0;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
         /* Navigation */
         .navbar {
             position: sticky;
             top: 0;
-            z-index: 1000;
             background: var(--white);
             box-shadow: var(--shadow-light);
             height: var(--header-height);
             display: flex;
             align-items: center;
+            z-index: 1000;
         }
-
+        
         .navbar .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .logo {
             display: flex;
             align-items: center;
@@ -150,108 +77,69 @@
             text-decoration: none;
             font-size: 1.5rem;
             font-weight: 700;
-            transition: transform 0.2s;
-        }
-
-        .logo:hover {
-            transform: scale(1.02);
-        }
-
-        .logo-emoji {
-            font-size: 2rem;
-        }
-
-        .logo-text {
             color: var(--text-dark);
         }
-
-        .logo-highlight {
-            color: var(--primary-green);
-            margin-left: 4px;
-        }
-
-        .logo-highlight-black {
-            color: var(--text-dark);
-        }
-
-        .logo-balbriggan {
-            color: var(--primary-green);
-        }
-
+        
+        .logo-emoji { font-size: 2rem; }
+        .logo-highlight { color: var(--primary-green); margin-left: 4px; }
+        
         .nav-links {
             display: flex;
             gap: 1.5rem;
             align-items: center;
         }
-
+        
         .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
             padding: 0.5rem 0.75rem;
             border-radius: var(--border-radius-round);
-            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 6px;
         }
-
+        
         .nav-links a:hover,
         .nav-links a.active {
             background: var(--light-green);
             color: var(--primary-green);
         }
+        
+        .nav-emoji { font-size: 1.1rem; }
 
-        .nav-emoji {
-            font-size: 1.1rem;
-        }
-
-        /* Mobile Menu Toggle */
+        /* Mobile Menu */
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            cursor: pointer;
             font-size: 1.8rem;
-            padding: 0.5rem;
             color: var(--primary-green);
-            z-index: 1001;
-            transition: transform 0.3s ease;
+            cursor: pointer;
             width: 48px;
             height: 48px;
-            align-items: center;
-            justify-content: center;
         }
-
-        .menu-toggle.active {
-            transform: rotate(90deg);
-            color: var(--accent-teal);
-        }
-
-        /* Mobile Menu */
+        
         .mobile-menu {
             position: fixed;
             top: var(--header-height);
             left: 0;
             width: 100%;
-            height: calc(100vh - var(--header-height));
-            background: linear-gradient(135deg, var(--white), var(--off-white));
+            background: var(--white);
             box-shadow: var(--shadow-heavy);
-            z-index: 999;
             transform: translateX(-100%);
             opacity: 0;
             visibility: hidden;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s, visibility 0.3s;
-            padding: 1rem 0;
-            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 999;
         }
-
+        
         .mobile-menu.active {
             transform: translateX(0);
             opacity: 1;
             visibility: visible;
         }
-
+        
         .mobile-menu a {
             display: flex;
             align-items: center;
@@ -259,700 +147,207 @@
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--light-gray);
         }
-
-        .mobile-menu a:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-menu a:hover,
-        .mobile-menu a.active {
-            background: var(--light-green);
-            color: var(--primary-green);
-            padding-left: 2.5rem;
-        }
-
-        .mobile-menu .nav-emoji {
-            margin-right: 12px;
-            font-size: 1.2rem;
-        }
-
+        
         .menu-backdrop {
             position: fixed;
             top: var(--header-height);
             left: 0;
             width: 100%;
             height: calc(100vh - var(--header-height));
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(3px);
+            background: rgba(0,0,0,0.5);
             z-index: 998;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
+            transition: all 0.3s;
         }
-
+        
         .menu-backdrop.active {
             opacity: 1;
             visibility: visible;
         }
 
-        /* Desktop Navigation */
-        @media (min-width: 993px) {
-            .nav-links {
-                display: flex !important;
-            }
-            
-            .mobile-menu,
-            .menu-backdrop,
-            .menu-toggle {
-                display: none !important;
-            }
-        }
-
-        /* Mobile Navigation */
         @media (max-width: 992px) {
-            .nav-links {
-                display: none !important;
-            }
-            
-            .menu-toggle {
-                display: flex !important;
-            }
+            .nav-links { display: none !important; }
+            .menu-toggle { display: flex !important; }
+        }
+        
+        @media (min-width: 993px) {
+            .mobile-menu, .menu-backdrop { display: none !important; }
         }
 
-        /* Prevent body scroll when menu open */
-        body.menu-open {
-            overflow: hidden;
-            position: fixed;
-            width: 100%;
-        }
-
-        /* Flash Messages */
-        .flash-messages {
-            position: fixed;
-            top: calc(var(--header-height) + 1rem);
-            right: 1rem;
-            z-index: 999;
-            max-width: 400px;
-        }
-
-        .flash-message {
-            background: var(--primary-green);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 0.5rem;
-            box-shadow: var(--shadow-medium);
-            animation: slideInRight 0.3s ease;
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* Newsletter Section */
-        .newsletter {
-            background: var(--gradient-blossom);
-            padding: 4rem 0;
-            color: white;
-        }
-
-        .newsletter-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .newsletter-emoji {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .newsletter h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .newsletter-grow {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.2rem 1rem;
-            border-radius: var(--border-radius-round);
-        }
-
-        .newsletter-form {
-            display: flex;
-            gap: 1rem;
-            margin: 2rem 0 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            min-width: 250px;
-            padding: 1rem 1.5rem;
-            border: none;
-            border-radius: var(--border-radius-round);
-            font-size: 1rem;
-            box-shadow: var(--shadow-light);
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: var(--border-radius-round);
-            background: var(--dark-green);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            background: var(--primary-green);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .btn-sparkle {
-            background: var(--accent-teal);
-        }
-
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-        }
-
-        .newsletter-note {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
+        body.menu-open { overflow: hidden; }
 
         /* Footer */
         footer {
             background: var(--dark-green);
             color: white;
-            padding: 4rem 0 2rem;
+            padding: 3rem 0 2rem;
+            margin-top: 2rem;
         }
-
+        
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
-
-        .footer-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-tagline {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 1rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-link {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .social-emoji {
-            font-size: 1.2rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
+        
         .footer-section a {
             color: white;
             text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
             opacity: 0.9;
-            transition: opacity 0.3s, padding-left 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-
-        .footer-section a:hover {
-            opacity: 1;
-            padding-left: 5px;
-        }
-
+        
+        .footer-section a:hover { opacity: 1; }
+        
         .footer-bottom {
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
-        }
-
-        .footer-credits {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .heart-emoji {
-            color: #FF6B6B;
-        }
-
-        .footer-legal {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        .footer-legal a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .footer-legal a:hover {
-            text-decoration: underline;
-        }
-
-        .grow-counter {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--border-radius-round);
-        }
-
-        /* Main Content Area */
-        main {
-            min-height: 60vh;
-            padding: 2rem 0;
-        }
-
-        #main-content {
-            scroll-margin-top: var(--header-height);
-        }
-
-        /* Animations */
-        @keyframes slideIn {
-            from {
-                transform: translateX(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .mobile-menu.active a {
-            animation: slideIn 0.3s ease-out forwards;
-            opacity: 0;
-        }
-
-        .mobile-menu.active a:nth-child(1) { animation-delay: 0.1s; }
-        .mobile-menu.active a:nth-child(2) { animation-delay: 0.15s; }
-        .mobile-menu.active a:nth-child(3) { animation-delay: 0.2s; }
-        .mobile-menu.active a:nth-child(4) { animation-delay: 0.25s; }
-        .mobile-menu.active a:nth-child(5) { animation-delay: 0.3s; }
-        .mobile-menu.active a:nth-child(6) { animation-delay: 0.35s; }
-
-        /* Print Styles */
-        @media print {
-            .navbar,
-            .newsletter,
-            .menu-toggle,
-            .mobile-menu,
-            .menu-backdrop,
-            .footer-bottom {
-                display: none !important;
-            }
-
-            body {
-                background: white;
-                color: black;
-            }
-        }
-
-        /* No-JS Fallback */
-        .no-js .mobile-menu {
-            display: block;
-            position: static;
-            transform: none;
-            opacity: 1;
-            visibility: visible;
-            height: auto;
-        }
-
-        .no-js .menu-toggle,
-        .no-js .menu-backdrop {
-            display: none !important;
         }
     </style>
     
     {% block extra_css %}{% endblock %}
-    
-    <!-- JSON-LD Structured Data -->
-    {% block schema %}
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "GrowBalbriggan",
-        "url": "{{ request.url_root if request else '' }}",
-        "logo": "{{ url_for('static', filename='images/logo.png', _external=True) }}",
-        "sameAs": [
-            "https://www.instagram.com/growbalbriggan",
-            "https://twitter.com/GrowBalbriggan",
-            "https://youtube.com/@GrowBalbriggan"
-        ],
-        "description": "Gardening community in Balbriggan, North County Dublin",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Balbriggan",
-            "addressRegion": "Dublin",
-            "addressCountry": "IE"
-        }
-    }
-    </script>
-    {% endblock %}
 </head>
 <body>
-    <!-- Skip Link for Accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
     <!-- Navigation -->
-    <nav class="navbar" aria-label="Main navigation">
+    <nav class="navbar">
         <div class="container">
-            <!-- Logo as home link -->
-            <a href="/" class="logo" aria-label="GrowBalbriggan - Home">
-                <span class="logo-emoji" aria-hidden="true">🌱</span>
+            <a href="/" class="logo">
+                <span class="logo-emoji">🌱</span>
                 <span class="logo-text">Grow<span class="logo-highlight">Balbriggan</span></span>
-                <span class="visually-hidden">Home</span>
             </a>
             
-            <!-- Desktop Navigation -->
             <div class="nav-links">
-                <a href="/videos" {% if request and request.path == '/videos' %}class="active"{% endif %}>
-                    <span class="nav-emoji" aria-hidden="true">🎥</span> Video Classes
-                </a>
-                <a href="/tips" {% if request and request.path == '/tips' %}class="active"{% endif %}>
-                    <span class="nav-emoji" aria-hidden="true">💡</span> Tips
-                </a>
-                <a href="/plants" {% if request and request.path == '/plants' %}class="active"{% endif %}>
-                    <span class="nav-emoji" aria-hidden="true">🌿</span> Plants
-                </a>
-                <a href="/seasonal" {% if request and request.path == '/seasonal' %}class="active"{% endif %}>
-                    <span class="nav-emoji" aria-hidden="true">📅</span> Seasonal
-                </a>
-                <a href="/community" {% if request and request.path == '/community' %}class="active"{% endif %}>
-                    <span class="nav-emoji" aria-hidden="true">👥</span> Community
-                </a>
-                <a href="/contact" {% if request and request.path == '/contact' %}class="active"{% endif %}>
-                    <span class="nav-emoji" aria-hidden="true">📧</span> Contact
-                </a>
+                <a href="/videos"><span class="nav-emoji">🎥</span> Videos</a>
+                <a href="/tips"><span class="nav-emoji">💡</span> Tips</a>
+                <a href="/plants"><span class="nav-emoji">🌿</span> Plants</a>
+                <a href="/seasonal"><span class="nav-emoji">📅</span> Seasonal</a>
+                <a href="/community"><span class="nav-emoji">👥</span> Community</a>
+                <a href="/contact"><span class="nav-emoji">📧</span> Contact</a>
             </div>
             
-            <!-- Mobile Menu Toggle Button -->
-            <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
-                <span class="menu-icon" aria-hidden="true">☰</span>
+            <button class="menu-toggle" id="menuToggle">
+                <span class="menu-icon">☰</span>
             </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu Backdrop -->
-    <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-        <a href="/videos" {% if request and request.path == '/videos' %}class="active"{% endif %}>
-            <span class="nav-emoji" aria-hidden="true">🎥</span> Video Classes
-        </a>
-        <a href="/tips" {% if request and request.path == '/tips' %}class="active"{% endif %}>
-            <span class="nav-emoji" aria-hidden="true">💡</span> Tips
-        </a>
-        <a href="/plants" {% if request and request.path == '/plants' %}class="active"{% endif %}>
-            <span class="nav-emoji" aria-hidden="true">🌿</span> Plants
-        </a>
-        <a href="/seasonal" {% if request and request.path == '/seasonal' %}class="active"{% endif %}>
-            <span class="nav-emoji" aria-hidden="true">📅</span> Seasonal
-        </a>
-        <a href="/community" {% if request and request.path == '/community' %}class="active"{% endif %}>
-            <span class="nav-emoji" aria-hidden="true">👥</span> Community
-        </a>
-        <a href="/contact" {% if request and request.path == '/contact' %}class="active"{% endif %}>
-            <span class="nav-emoji" aria-hidden="true">📧</span> Contact
-        </a>
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/videos"><span class="nav-emoji">🎥</span> Videos</a>
+        <a href="/tips"><span class="nav-emoji">💡</span> Tips</a>
+        <a href="/plants"><span class="nav-emoji">🌿</span> Plants</a>
+        <a href="/seasonal"><span class="nav-emoji">📅</span> Seasonal</a>
+        <a href="/community"><span class="nav-emoji">👥</span> Community</a>
+        <a href="/contact"><span class="nav-emoji">📧</span> Contact</a>
     </div>
 
     <!-- Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="flash-messages">
-                {% for category, message in messages %}
-                    <div class="flash-message flash-{{ category }}" role="alert">
-                        {{ message }}
-                    </div>
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
                 {% endfor %}
             </div>
         {% endif %}
     {% endwith %}
 
     <!-- Main Content -->
-    <main id="main-content">
+    <main>
         {% block content %}{% endblock %}
     </main>
-
-    <!-- Newsletter Section -->
-    <section class="newsletter" aria-label="Newsletter signup">
-        <div class="container">
-            <div class="newsletter-content">
-                <div class="newsletter-emoji" aria-hidden="true">📬</div>
-                <h2>Stay in the <span class="newsletter-grow">Grow</span>!</h2>
-                <p>Get weekly gardening tips, video class updates, and exclusive Balbriggan growing guides</p>
-                
-                {% if config.get('NEWSLETTER_ENABLED', True) %}
-                <form action="{{ url_for('subscribe') }}" method="POST" class="newsletter-form">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() if csrf_token }}">
-                    <label for="newsletter-email" class="visually-hidden">Email address</label>
-                    <input type="email" id="newsletter-email" name="email" placeholder="Your email address" required aria-label="Email address for newsletter">
-                    <button type="submit" class="btn btn-sparkle">
-                        <span class="btn-emoji" aria-hidden="true">✨</span> Subscribe
-                    </button>
-                </form>
-                <p class="newsletter-note">Join {{ newsletter_subscriber_count|default('500+') }} Balbriggan gardeners already growing with us!</p>
-                {% else %}
-                <p class="newsletter-note">Newsletter signup is currently closed. Check back soon!</p>
-                {% endif %}
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <div class="footer-logo">
-                        <span class="logo-emoji" aria-hidden="true">🌱</span>
-                        <span class="logo-text">
-                            <span class="logo-highlight-black">Grow</span><span class="logo-balbriggan">Balbriggan</span>
-                        </span>
+                    <div style="display: flex; align-items: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
+                        <span>🌱</span>
+                        <span>Grow<span style="color: var(--primary-green);">Balbriggan</span></span>
                     </div>
-                    <p class="footer-tagline">Growing North County Dublin together, one plant at a time! 🌸</p>
-                    <div class="social-links">
-                        <a href="https://instagram.com/growbalbriggan" class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
-                            <span class="social-emoji" aria-hidden="true">📸</span>
-                        </a>
-                        <a href="https://twitter.com/GrowBalbriggan" class="social-link" aria-label="Twitter" target="_blank" rel="noopener">
-                            <span class="social-emoji" aria-hidden="true">🐦</span>
-                        </a>
-                        <a href="https://facebook.com/growbalbriggan" class="social-link" aria-label="Facebook" target="_blank" rel="noopener">
-                            <span class="social-emoji" aria-hidden="true">📘</span>
-                        </a>
-                        <a href="https://youtube.com/@GrowBalbriggan" class="social-link" aria-label="YouTube" target="_blank" rel="noopener">
-                            <span class="social-emoji" aria-hidden="true">🎥</span>
-                        </a>
+                    <p style="margin-bottom: 1rem;">Growing North County Dublin together, one plant at a time! 🌸</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: white;">📸</a>
+                        <a href="#" style="color: white;">🐦</a>
+                        <a href="#" style="color: white;">📘</a>
+                        <a href="https://youtube.com/@GrowBalbriggan" style="color: white;">🎥</a>
                     </div>
                 </div>
                 
                 <div class="footer-section">
-                    <h3><span class="footer-emoji" aria-hidden="true">📍</span> Balbriggan Hotspots</h3>
-                    <a href="/community#bremore"><span class="link-emoji" aria-hidden="true">🌳</span> Bremore Castle Gardens</a>
-                    <a href="/community#market"><span class="link-emoji" aria-hidden="true">🛒</span> Saturday Farmers Market</a>
-                    <a href="/seasonal#coastal"><span class="link-emoji" aria-hidden="true">🏖️</span> Coastal Growing Tips</a>
-                    <a href="/plants"><span class="link-emoji" aria-hidden="true">🎯</span> Plant Guides</a>
+                    <h3 style="margin-bottom: 1rem;">📍 Balbriggan Hotspots</h3>
+                    <a href="/community">🌳 Bremore Castle Gardens</a>
+                    <a href="/community">🛒 Saturday Farmers Market</a>
+                    <a href="/seasonal">🏖️ Coastal Growing Tips</a>
+                    <a href="/plants">🎯 Plant Guides</a>
                 </div>
                 
                 <div class="footer-section">
-                    <h3><span class="footer-emoji" aria-hidden="true">🚀</span> Quick Grow</h3>
-                    <a href="/videos"><span class="link-emoji" aria-hidden="true">🎥</span> Weekly Classes</a>
-                    <a href="/tips"><span class="link-emoji" aria-hidden="true">🌱</span> Beginner's Guide</a>
-                    <a href="/seasonal"><span class="link-emoji" aria-hidden="true">📅</span> This Week's Tasks</a>
-                    <a href="/community"><span class="link-emoji" aria-hidden="true">👥</span> Weekend Meetup</a>
+                    <h3 style="margin-bottom: 1rem;">🚀 Quick Grow</h3>
+                    <a href="/videos">🎥 Weekly Classes</a>
+                    <a href="/tips">🌱 Beginner's Guide</a>
+                    <a href="/seasonal">📅 This Week's Tasks</a>
+                    <a href="/community">👥 Weekend Meetup</a>
                 </div>
                 
                 <div class="footer-section">
-                    <h3><span class="footer-emoji" aria-hidden="true">📋</span> Legal & Community</h3>
-                    <a href="/privacy"><span class="link-emoji" aria-hidden="true">🔒</span> Privacy Policy</a>
-                    <a href="/terms"><span class="link-emoji" aria-hidden="true">📝</span> Terms of Service</a>
-                    <a href="/rules"><span class="link-emoji" aria-hidden="true">🤝</span> Community Rules</a>
-                    <a href="/contact" class="btn btn-small">
-                        <span class="btn-emoji" aria-hidden="true">👋</span> Say Hi!
-                    </a>
+                    <h3 style="margin-bottom: 1rem;">📋 Legal</h3>
+                    <a href="/privacy">🔒 Privacy</a>
+                    <a href="/terms">📝 Terms</a>
+                    <a href="/contact" style="background: var(--primary-green); padding: 0.5rem 1rem; border-radius: 30px; display: inline-block; margin-top: 0.5rem;">👋 Say Hi!</a>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <div class="footer-credits">
-                    <p class="footer-inspiration">Inspiring growth in North County Dublin since 2024-{{ now.year|default('2025') }}</p>
-                    <span class="heart-emoji" aria-hidden="true">💚</span>
-                    <p>Made with purpose by Kareemat Adebisi</p>
-                    <span class="heart-emoji" aria-hidden="true">💚</span>
-                </div>
-                <div class="footer-legal">
-                    <a href="/privacy">Privacy</a> • 
-                    <a href="/terms">Terms</a> • 
-                    <a href="/rules">Community Rules</a> • 
-                    <span class="grow-counter" aria-label="Total gardens growing">🌻 {{ garden_count|default('1,234') }} Gardens Growing!</span>
-                </div>
+                <p style="margin-bottom: 0.5rem;">💚 Made with purpose by Kareemat Adebisi 💚</p>
+                <p style="opacity: 0.8;">🌻 {{ "1,234" }} Gardens Growing!</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Mobile Menu JavaScript -->
     <script>
-        // Detect JavaScript support
-        document.documentElement.classList.remove('no-js');
-        document.documentElement.classList.add('js');
-        
-        // Mobile Menu JavaScript
-        (function() {
-            'use strict';
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuBackdrop = document.getElementById('menuBackdrop');
+            const body = document.body;
             
-            // Wait for DOM to be ready
-            function domReady() {
-                const menuToggle = document.getElementById('menuToggle');
-                const mobileMenu = document.getElementById('mobileMenu');
-                const menuBackdrop = document.getElementById('menuBackdrop');
-                const body = document.body;
+            function toggleMenu() {
+                mobileMenu.classList.toggle('active');
+                menuBackdrop.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                body.classList.toggle('menu-open');
                 
-                if (!menuToggle || !mobileMenu || !menuBackdrop) return;
-                
-                let isMenuOpen = false;
-                
-                // Toggle mobile menu
-                function toggleMenu() {
-                    isMenuOpen = !isMenuOpen;
-                    
-                    if (isMenuOpen) {
-                        openMenu();
-                    } else {
-                        closeMenu();
-                    }
-                }
-                
-                // Open mobile menu
-                function openMenu() {
-                    mobileMenu.classList.add('active');
-                    menuBackdrop.classList.add('active');
-                    menuToggle.classList.add('active');
-                    menuToggle.setAttribute('aria-expanded', 'true');
-                    body.classList.add('menu-open');
-                    
-                    // Change icon to X
-                    menuToggle.innerHTML = '<span class="menu-icon" aria-hidden="true">✕</span>';
-                }
-                
-                // Close mobile menu
-                function closeMenu() {
-                    mobileMenu.classList.remove('active');
-                    menuBackdrop.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    body.classList.remove('menu-open');
-                    
-                    // Change icon back to hamburger
-                    menuToggle.innerHTML = '<span class="menu-icon" aria-hidden="true">☰</span>';
-                }
-                
-                // Event listeners
-                menuToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
+                menuToggle.innerHTML = mobileMenu.classList.contains('active') 
+                    ? '<span class="menu-icon">✕</span>' 
+                    : '<span class="menu-icon">☰</span>';
+            }
+            
+            menuToggle.addEventListener('click', toggleMenu);
+            menuBackdrop.addEventListener('click', toggleMenu);
+            
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+            
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992 && mobileMenu.classList.contains('active')) {
                     toggleMenu();
-                });
-                
-                menuBackdrop.addEventListener('click', closeMenu);
-                
-                // Close menu when clicking on a link
-                const mobileLinks = mobileMenu.querySelectorAll('a');
-                mobileLinks.forEach(function(link) {
-                    link.addEventListener('click', closeMenu);
-                });
-                
-                // Close menu on escape key
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && isMenuOpen) {
-                        closeMenu();
-                    }
-                });
-                
-                // Handle window resize
-                let resizeTimer;
-                window.addEventListener('resize', function() {
-                    clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(function() {
-                        if (window.innerWidth > 992 && isMenuOpen) {
-                            closeMenu();
-                        }
-                    }, 250);
-                });
-                
-                // Set active class based on current URL
-                const currentPath = window.location.pathname;
-                document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(function(link) {
-                    if (link.getAttribute('href') === currentPath) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-            
-            // Run when DOM is ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', domReady);
-            } else {
-                domReady();
-            }
-        })();
+                }
+            });
+        });
     </script>
     
-    <!-- External JavaScript with defer -->
-    <script src="{{ url_for('static', filename='js/script.js') }}?v={{ config.get('VERSION', '1.0.0') }}" defer></script>
-    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
