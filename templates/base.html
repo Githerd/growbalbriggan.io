@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}GrowBalbriggan - Grow Your Garden in North County Dublin{% endblock %}</title>
     
+    <!-- Meta Description & Keywords -->
     <meta name="description" content="{% block description %}Learn gardening in Balbriggan, North Dublin. Weekly video classes, seasonal tips, plant guides, and community gardening events.{% endblock %}">
     <meta name="keywords" content="{% block keywords %}Balbriggan gardening, Dublin gardening, vegetable growing, community garden, gardening classes, Ireland gardening, beginner gardening{% endblock %}">
-    
-    <!-- Open Graph / Facebook -->
+
+    <!-- Open Graph / Facebook (Single instance) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
     <meta property="og:description" content="{% block og_description %}{{ self.description() }}{% endblock %}">
     <meta property="og:image" content="{{ url_for('static', filename='images/growbalbriggan-logo.png', _external=True) }}">
     <meta property="og:url" content="{{ request.url if request else '' }}">
     
-    <!-- Twitter -->
+    <!-- Twitter Card (Single instance) -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% block twitter_title %}{{ self.title() }}{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}{{ self.description() }}{% endblock %}">
@@ -25,11 +26,10 @@
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
     
-    <!-- CSS -->
+    <!-- CSS (Single instances) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
-    {% block extra_css %}{% endblock %}
     
     <!-- Mobile Navigation CSS -->
     <style>
