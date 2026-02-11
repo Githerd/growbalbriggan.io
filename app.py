@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'growbalbriggan-secret-key-2024')
+app.secret_key = os.environ.get('SECRET_KEY', 'growbalbriggan-local-dev-2024')
 
 # Balbriggan-specific data
 BALBRIGGAN_INFO = {
@@ -22,7 +22,7 @@ def load_gardening_tips():
     try:
         with open('data/tips.json', 'r', encoding='utf-8') as f:
             return json.load(f)
-    except:
+    except FileNotFoundError:
         return [
             {
                 "id": 1,
@@ -34,13 +34,14 @@ def load_gardening_tips():
                 "seasonal": False
             }
         ]
+    except json.JSONDecodeError:
+        return []
 
 def load_plants_data():
     try:
         with open('data/plants.json', 'r', encoding='utf-8') as f:
             return json.load(f)
-    except:
-        # Return default plants if file not found - UPDATED VERSION
+    except FileNotFoundError:
         return [
             {
                 "id": 1,
@@ -51,29 +52,21 @@ def load_plants_data():
                 "emoji": "🌊",
                 "difficulty": "easy",
                 "type": "vegetable"
-            },
-            {
-                "id": 2,
-                "name": "Balbriggan Berries",
-                "description": "Strawberries & raspberries thrive in our microclimate.",
-                "sun": "6+ hours",
-                "planting_time": "March-May",
-                "emoji": "🍓",
-                "difficulty": "medium",
-                "type": "fruit"
             }
         ]
+    except json.JSONDecodeError:
+        return []
 
 def load_video_classes():
     try:
         with open('data/videos.json', 'r', encoding='utf-8') as f:
             return json.load(f)
-    except:
+    except (FileNotFoundError, json.JSONDecodeError):
         return [
             {
                 "id": 1,
                 "title": "Getting Started with Balcony Gardening",
-                "description": "Learn how to grow food in small spaces in Balbriggan",
+                "description": "Learn how to grow vegetables, herbs, and flowers in small spaces",
                 "date": "2024-03-15",
                 "duration": "25:30",
                 "youtube_id": "dQw4w9WgXcQ",
@@ -118,7 +111,7 @@ def plants_page():
 @app.route('/seasonal')
 def seasonal_page():
     tips = load_gardening_tips()
-    seasonal_tips = [tip for tip in tips if tip.get('seasonal')]
+    seasonal_tips = [tip for tip in tips if tip.get('seasonal', False)]
     
     current_month = datetime.now().strftime("%B")
     month_emoji = {
@@ -145,7 +138,6 @@ def contact():
         email = request.form.get('email')
         message = request.form.get('message')
         
-        print(f"Contact from {name}: {email} - {message}")
         flash("🎉 Thanks for reaching out! We'll get back to you soon!", "success")
         return redirect(url_for('contact'))
     
@@ -168,7 +160,6 @@ def rules_page():
 def subscribe():
     email = request.form.get('email')
     if email:
-        print(f"New subscriber: {email}")
         flash(f"🌱 Welcome to GrowBalbriggan! Check your email for gardening tips!", "success")
     else:
         flash("Please enter a valid email address", "error")
@@ -185,12 +176,6 @@ def api_tips():
 def api_videos():
     videos = load_video_classes()
     return jsonify(videos)
-
-@app.route('/api/videos/<difficulty>')
-def api_videos_by_difficulty(difficulty):
-    videos = load_video_classes()
-    filtered = [v for v in videos if v.get('difficulty') == difficulty]
-    return jsonify(filtered)
 
 @app.route('/api/balbriggan-events')
 def api_events():
@@ -212,11 +197,12 @@ def internal_server_error(e):
 
 # Create necessary directories on startup
 def create_directories():
-    directories = ['data', 'static/images', 'templates']
+    directories = ['data', 'static/images', 'static/css', 'static/js', 'templates']
     for directory in directories:
         os.makedirs(directory, exist_ok=True)
 
 if __name__ == '__main__':
     create_directories()
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    debug = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(host='0.0.0.0', port=port, debug=debug)
