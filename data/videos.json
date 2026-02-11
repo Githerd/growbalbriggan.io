@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "title": "Getting Started with Balcony Gardening",
+        "description": "Learn how to grow vegetables, herbs, and flowers in small spaces perfect for Balbriggan apartments",
+        "date": "2024-03-15",
+        "duration": "25:30",
+        "youtube_id": "dQw4w9WgXcQ",
+        "instructor": "Sarah O'Connor",
+        "difficulty": "beginner",
+        "tags": ["balcony", "containers", "beginners", "small-space"],
+        "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Preparing Balbriggan Soil for Spring",
+        "description": "Understanding our unique coastal soil and how to prepare it for optimal planting",
+        "date": "2024-03-08",
+        "duration": "18:45",
+        "youtube_id": "abcdefghijk",
+        "instructor": "Mike Chen",
+        "difficulty": "beginner",
+        "tags": ["soil", "preparation", "spring", "coastal"],
+        "thumbnail": "https://img.youtube.com/vi/abcdefghijk/hqdefault.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Tomato Growing Masterclass",
+        "description": "How to grow delicious tomatoes in Balbriggan's climate - greenhouse and outdoor methods",
+        "date": "2024-03-01",
+        "duration": "32:15",
+        "youtube_id": "lmnopqrstuv",
+        "instructor": "Aoife Murphy",
+        "difficulty": "intermediate",
+        "tags": ["tomatoes", "vegetables", "greenhouse", "summer"],
+        "thumbnail": "https://img.youtube.com/vi/lmnopqrstuv/hqdefault.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Composting in Small Spaces",
+        "description": "Create rich compost for your garden even with limited space in Balbriggan",
+        "date": "2024-02-23",
+        "duration": "22:10",
+        "youtube_id": "wxyz123456",
+        "instructor": "Community Team",
+        "difficulty": "beginner",
+        "tags": ["compost", "sustainability", "recycling", "soil-health"],
+        "thumbnail": "https://img.youtube.com/vi/wxyz123456/hqdefault.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Pruning Fruit Trees for Maximum Yield",
+        "description": "Expert techniques for pruning apple, pear, and plum trees in North Dublin",
+        "date": "2024-02-16",
+        "duration": "28:45",
+        "youtube_id": "7890abcdef",
+        "instructor": "David Ryan",
+        "difficulty": "advanced",
+        "tags": ["pruning", "fruit-trees", "winter", "orchard"],
+        "thumbnail": "https://img.youtube.com/vi/7890abcdef/hqdefault.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Creating a Pollinator Garden",
+        "description": "Attract bees and butterflies to your Balbriggan garden with native plants",
+        "date": "2024-02-09",
+        "duration": "20:30",
+        "youtube_id": "ghijklmnopq",
+        "instructor": "Lisa Wong",
+        "difficulty": "intermediate",
+        "tags": ["pollinators", "wildlife", "flowers", "biodiversity"],
+        "thumbnail": "https://img.youtube.com/vi/ghijklmnopq/hqdefault.jpg"
+    }
+]
