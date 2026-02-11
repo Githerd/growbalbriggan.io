@@ -86,8 +86,7 @@ def load_balbriggan_events():
 
 @app.route('/')
 def home():
-    # Redirect to videos page as new homepage
-    return redirect(url_for('videos_page'))
+    return render_template('index.html')
 
 @app.route('/videos')
 def videos_page():
