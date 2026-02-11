@@ -30,6 +30,163 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
     {% block extra_css %}{% endblock %}
+    
+    <!-- Mobile Navigation CSS -->
+    <style>
+        /* Mobile Navigation Styles */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            color: var(--primary-green);
+            z-index: 1001;
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-toggle.active {
+            transform: rotate(90deg);
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 70px; /* Height of navbar */
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: var(--shadow-heavy);
+            z-index: 999;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            padding: 1rem 0;
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            background: var(--light-green);
+            color: var(--primary-green);
+            padding-left: 2.5rem;
+        }
+        
+        .mobile-menu .nav-emoji {
+            margin-right: 10px;
+        }
+        
+        /* Close button for mobile menu */
+        .mobile-menu-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            padding: 0.5rem;
+        }
+        
+        /* Backdrop overlay */
+        .menu-backdrop {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .menu-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive Navbar */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .navbar {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                background: var(--white);
+                box-shadow: var(--shadow-light);
+            }
+        }
+        
+        @media (min-width: 993px) {
+            .mobile-menu {
+                display: none !important;
+            }
+        }
+        
+        /* Prevent body scroll when menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
+        
+        /* Animation for menu toggle icon */
+        @keyframes menuToggleRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(90deg); }
+        }
+        
+        /* Mobile menu animation */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .mobile-menu a {
+            animation: slideDown 0.3s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .mobile-menu a:nth-child(1) { animation-delay: 0.1s; }
+        .mobile-menu a:nth-child(2) { animation-delay: 0.15s; }
+        .mobile-menu a:nth-child(3) { animation-delay: 0.2s; }
+        .mobile-menu a:nth-child(4) { animation-delay: 0.25s; }
+        .mobile-menu a:nth-child(5) { animation-delay: 0.3s; }
+        .mobile-menu a:nth-child(6) { animation-delay: 0.35s; }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -61,20 +218,37 @@
                     <span class="nav-emoji">📧</span> Contact
                 </a>
             </div>
-            <button class="menu-toggle" aria-label="Toggle menu">
-                <span class="menu-emoji">🍃</span>
+            
+            <!-- Updated menu toggle button -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span class="menu-icon">☰</span>
             </button>
         </div>
     </nav>
 
+    <!-- Mobile Menu Backdrop -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
     <!-- Mobile Menu (Hidden by default) -->
-    <div class="mobile-menu">
-        <a href="/videos"><span class="nav-emoji">🎥</span> Video Classes</a>
-        <a href="/tips"><span class="nav-emoji">💡</span> Tips</a>
-        <a href="/plants"><span class="nav-emoji">🌿</span> Plants</a>
-        <a href="/seasonal"><span class="nav-emoji">📅</span> Seasonal</a>
-        <a href="/community"><span class="nav-emoji">👥</span> Community</a>
-        <a href="/contact"><span class="nav-emoji">📧</span> Contact</a>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/videos" {% if request.path == '/videos' %}class="active"{% endif %}>
+            <span class="nav-emoji">🎥</span> Video Classes
+        </a>
+        <a href="/tips" {% if request.path == '/tips' %}class="active"{% endif %}>
+            <span class="nav-emoji">💡</span> Tips
+        </a>
+        <a href="/plants" {% if request.path == '/plants' %}class="active"{% endif %}>
+            <span class="nav-emoji">🌿</span> Plants
+        </a>
+        <a href="/seasonal" {% if request.path == '/seasonal' %}class="active"{% endif %}>
+            <span class="nav-emoji">📅</span> Seasonal
+        </a>
+        <a href="/community" {% if request.path == '/community' %}class="active"{% endif %}>
+            <span class="nav-emoji">👥</span> Community
+        </a>
+        <a href="/contact" {% if request.path == '/contact' %}class="active"{% endif %}>
+            <span class="nav-emoji">📧</span> Contact
+        </a>
     </div>
 
     <!-- Flash Messages -->
@@ -93,48 +267,43 @@
         {% block content %}{% endblock %}
     </main>
 
-<!-- In your base.html template, update these sections: -->
-
-<!-- Newsletter section -->
-<section class="newsletter" aria-label="Newsletter signup">
-    <div class="container">
-        <div class="newsletter-content">
-            <div class="newsletter-emoji">📬</div>
-            <!-- Updated h2 with span for "Grow" -->
-            <h2>Stay in the <span class="newsletter-grow">Grow</span>!</h2>
-            <p>Get weekly gardening tips, video class updates, and exclusive Balbriggan growing guides</p>
-            <form action="/subscribe" method="POST" class="newsletter-form">
-                <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
-                <button type="submit" class="btn btn-sparkle">
-                    <span class="btn-emoji">✨</span> Subscribe
-                </button>
-            </form>
-            <p class="newsletter-note">Join 500+ Balbriggan gardeners already growing with us!</p>
-        </div>
-    </div>
-</section>
-
-<!-- Footer section -->
-<footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <!-- Updated footer logo -->
-                <div class="footer-logo">
-                    <span class="logo-emoji">🌱</span>
-                    <!-- Updated span for "Grow" -->
-                    <span class="logo-text">
-                        <span class="logo-highlight-black">Grow</span><span class="logo-balbriggan">Balbriggan</span>
-                    </span>
-                </div>
-                <p class="footer-tagline">Growing North County Dublin together, one plant at a time! 🌸</p>
-                <div class="social-links">
-                    <a href="#" class="social-link" aria-label="Instagram"><span class="social-emoji">📸</span></a>
-                    <a href="#" class="social-link" aria-label="Twitter"><span class="social-emoji">🐦</span></a>
-                    <a href="#" class="social-link" aria-label="Facebook"><span class="social-emoji">📘</span></a>
-                    <a href="https://youtube.com/@GrowBalbriggan" class="social-link" aria-label="YouTube"><span class="social-emoji">🎥</span></a>
-                </div>
+    <!-- Newsletter section -->
+    <section class="newsletter" aria-label="Newsletter signup">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-emoji">📬</div>
+                <h2>Stay in the <span class="newsletter-grow">Grow</span>!</h2>
+                <p>Get weekly gardening tips, video class updates, and exclusive Balbriggan growing guides</p>
+                <form action="/subscribe" method="POST" class="newsletter-form">
+                    <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+                    <button type="submit" class="btn btn-sparkle">
+                        <span class="btn-emoji">✨</span> Subscribe
+                    </button>
+                </form>
+                <p class="newsletter-note">Join 500+ Balbriggan gardeners already growing with us!</p>
             </div>
+        </div>
+    </section>
+
+    <!-- Footer section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-emoji">🌱</span>
+                        <span class="logo-text">
+                            <span class="logo-highlight-black">Grow</span><span class="logo-balbriggan">Balbriggan</span>
+                        </span>
+                    </div>
+                    <p class="footer-tagline">Growing North County Dublin together, one plant at a time! 🌸</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram"><span class="social-emoji">📸</span></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><span class="social-emoji">🐦</span></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><span class="social-emoji">📘</span></a>
+                        <a href="https://youtube.com/@GrowBalbriggan" class="social-link" aria-label="YouTube"><span class="social-emoji">🎥</span></a>
+                    </div>
+                </div>
                 
                 <div class="footer-section">
                     <h3><span class="footer-emoji">📍</span> Balbriggan Hotspots</h3>
@@ -178,6 +347,96 @@
         </div>
     </footer>
 
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuBackdrop = document.getElementById('menuBackdrop');
+            const body = document.body;
+            
+            // Toggle mobile menu
+            function toggleMenu() {
+                const isOpen = mobileMenu.classList.contains('active');
+                
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            }
+            
+            // Open mobile menu
+            function openMenu() {
+                mobileMenu.classList.add('active');
+                menuBackdrop.classList.add('active');
+                menuToggle.classList.add('active');
+                menuToggle.setAttribute('aria-expanded', 'true');
+                body.classList.add('menu-open');
+                
+                // Change icon to X
+                menuToggle.innerHTML = '<span class="menu-icon">✕</span>';
+            }
+            
+            // Close mobile menu
+            function closeMenu() {
+                mobileMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                body.classList.remove('menu-open');
+                
+                // Change icon back to hamburger
+                menuToggle.innerHTML = '<span class="menu-icon">☰</span>';
+            }
+            
+            // Event listeners
+            menuToggle.addEventListener('click', toggleMenu);
+            menuBackdrop.addEventListener('click', closeMenu);
+            
+            // Close menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+            
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMenu();
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992) {
+                    closeMenu();
+                }
+            });
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Update menu toggle accessibility
+            menuToggle.setAttribute('aria-label', 'Toggle navigation menu');
+            menuToggle.setAttribute('aria-controls', 'mobileMenu');
+        });
+    </script>
+    
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     {% block extra_js %}{% endblock %}
 </body>
