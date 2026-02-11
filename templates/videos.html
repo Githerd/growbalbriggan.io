@@ -41,12 +41,11 @@
             <p class="section-subtitle">New video every Friday at 6 PM</p>
         </div>
         
-        {% if videos[0] %}
         <div class="video-player">
             <div class="video-container">
                 <iframe 
-                    src="https://www.youtube.com/shorts/-jB5dh575Wg?feature=share" 
-                    title="Cutting - Rosemary"
+                    src="https://www.youtube.com/embed/x3hkPLNTxN4" 
+                    title="Lettuce & Rocket Seeding for Balbriggan Gardens"
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
@@ -56,31 +55,57 @@
                 <div class="video-meta">
                     <span class="meta-badge new">NEW THIS WEEK</span>
                     <span class="meta-item">
-                        <span class="meta-emoji">📅</span> {{ videos[0].date }}
+                        <span class="meta-emoji">📅</span> Just Added
                     </span>
                     <span class="meta-item">
-                        <span class="meta-emoji">⏱️</span> {{ videos[0].duration }}
+                        <span class="meta-emoji">⏱️</span> 0:58
                     </span>
                     <span class="meta-item">
-                        <span class="meta-emoji">👩‍🏫</span> {{ videos[0].instructor }}
+                        <span class="meta-emoji">👩‍🏫</span> Community Team
+                    </span>
+                    <span class="meta-item">
+                        <span class="meta-emoji">🌱</span> Seeding
                     </span>
                 </div>
-                <h3>{{ videos[0].title }}</h3>
-                <p class="video-description">{{ videos[0].description }}</p>
+                <h3>Lettuce & Rocket Seeding for Balbriggan Gardens 🥬</h3>
+                <p class="video-description">Quick and easy seeding technique for salad greens that thrive in our coastal climate. Perfect for continuous harvests all season long!</p>
+                
+                <div class="video-highlights">
+                    <div class="highlight">
+                        <span class="highlight-emoji">🎯</span>
+                        <span class="highlight-text">Perfect for beginners</span>
+                    </div>
+                    <div class="highlight">
+                        <span class="highlight-emoji">🌊</span>
+                        <span class="highlight-text">Coastal climate optimized</span>
+                    </div>
+                    <div class="highlight">
+                        <span class="highlight-emoji">📅</span>
+                        <span class="highlight-text">Plant March-September</span>
+                    </div>
+                </div>
                 
                 <div class="video-actions">
-                    <button class="btn" onclick="location.href='https://www.youtube.com/@GrowBalbriggan/shorts'">
+                    <a href="https://www.youtube.com/@GrowBalbriggan" target="_blank" class="btn">
                         <span class="btn-emoji">▶️</span> Subscribe on YouTube
-                    </button>
+                    </a>
                     <button class="btn btn-secondary" id="reminder-btn">
                         <span class="btn-emoji">🔔</span> Set Weekly Reminder
                     </button>
+                    <a href="https://www.youtube.com/shorts/x3hkPLNTxN4?feature=share" target="_blank" class="btn btn-tertiary">
+                        <span class="btn-emoji">📱</span> Watch Short
+                    </a>
+                </div>
+                
+                <div class="video-tags-small">
+                    <span class="tag">lettuce</span>
+                    <span class="tag">rocket</span>
+                    <span class="tag">seeding</span>
+                    <span class="tag">salad-greens</span>
+                    <span class="tag">quick-grow</span>
                 </div>
             </div>
         </div>
-        {% endif %}
-    </div>
-</section>
 
 <!-- Video Library -->
 <section class="video-library">
