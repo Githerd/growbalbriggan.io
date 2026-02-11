@@ -1,36 +1,579 @@
 {% extends "base.html" %}
 
-{% block title %}GrowBalbriggan - Start Your North County Dublin Garden Adventure{% endblock %}
+{% block title %}Plant Guide - GrowBalbriggan | Plants That Thrive in North Dublin{% endblock %}
+
+{% block description %}Discover the best plants for Balbriggan's coastal climate. Vegetables, fruits, herbs, and flowers that love North County Dublin conditions.{% endblock %}
 
 {% block content %}
-    <main class="container" style="padding: 4rem 0;">
-        <h1>Plants for Balbriggan Gardens</h1>
-        <p class="subtitle">Discover what grows best in our North Dublin climate</p>
+<div class="container">
+    <!-- Plants Hero -->
+    <div class="plants-hero">
+        <div class="hero-emojis">🌿🌱🌸</div>
+        <h1>Balbriggan's Favorite Plants</h1>
+        <p class="hero-subtitle">Discover what grows best in our unique North Dublin coastal climate</p>
         
-        <div class="plant-filters" style="margin: 2rem 0;">
-            <button class="btn plant-filter active" data-type="all">All Plants</button>
-            <button class="btn plant-filter" data-type="vegetable">Vegetables</button>
-            <button class="btn plant-filter" data-type="fruit">Fruits</button>
-            <button class="btn plant-filter" data-type="flower">Flowers</button>
+        <div class="hero-filters">
+            <button class="filter-btn active" data-type="all">All Plants</button>
+            <button class="filter-btn" data-type="vegetable">🥕 Vegetables</button>
+            <button class="filter-btn" data-type="fruit">🍓 Fruits</button>
+            <button class="filter-btn" data-type="herb">🌿 Herbs</button>
+            <button class="filter-btn" data-type="flower">🌸 Flowers</button>
         </div>
-        
+    </div>
+
+    <!-- Plants Grid -->
+    <div class="plants-container">
         <div class="plants-grid">
             {% for plant in plants %}
             <div class="plant-card" data-type="{{ plant.type }}">
-                <img src="{{ url_for('static', filename='images/' + plant.image) }}" alt="{{ plant.name }}" class="plant-img" 
-                     onerror="this.src='https://via.placeholder.com/300x200?text=Plant+Image'">
+                <div class="plant-emoji">{{ plant.emoji }}</div>
                 <div class="plant-info">
                     <h3>{{ plant.name }}</h3>
-                    <p class="plant-desc">{{ plant.description }}</p>
-                    <div class="plant-meta">
-                        <span><i class="fas fa-sun"></i> {{ plant.sun }}</span>
-                        <span><i class="fas fa-calendar"></i> {{ plant.planting_time }}</span>
+                    <p class="plant-description">{{ plant.description }}</p>
+                    
+                    <div class="plant-details">
+                        <div class="detail">
+                            <span class="detail-emoji">☀️</span>
+                            <span class="detail-text">{{ plant.sun }}</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-emoji">📅</span>
+                            <span class="detail-text">{{ plant.planting_time }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="plant-footer">
+                        <span class="difficulty-badge {{ plant.difficulty }}">
+                            {{ plant.difficulty|capitalize }}
+                        </span>
+                        <span class="type-badge">
+                            {{ plant.type|capitalize }}
+                        </span>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-    </main>
+    </div>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- Seasonal Planting Guide -->
+    <div class="seasonal-guide">
+        <h2><span class="section-emoji">📅</span> Seasonal Planting Guide for Balbriggan</h2>
+        
+        <div class="season-grid">
+            <div class="season-card">
+                <div class="season-header spring">
+                    <div class="season-emoji">🌱</div>
+                    <h3>Spring (Mar-May)</h3>
+                </div>
+                <div class="season-plants">
+                    <span class="season-plant">🥔 Potatoes</span>
+                    <span class="season-plant">🌱 Peas</span>
+                    <span class="season-plant">🥕 Carrots</span>
+                    <span class="season-plant">🌿 Herbs</span>
+                </div>
+            </div>
+            
+            <div class="season-card">
+                <div class="season-header summer">
+                    <div class="season-emoji">☀️</div>
+                    <h3>Summer (Jun-Aug)</h3>
+                </div>
+                <div class="season-plants">
+                    <span class="season-plant">🍓 Strawberries</span>
+                    <span class="season-plant">🍅 Tomatoes</span>
+                    <span class="season-plant">🥬 Lettuce</span>
+                    <span class="season-plant">🌶️ Chillies</span>
+                </div>
+            </div>
+            
+            <div class="season-card">
+                <div class="season-header autumn">
+                    <div class="season-emoji">🍂</div>
+                    <h3>Autumn (Sep-Nov)</h3>
+                </div>
+                <div class="season-plants">
+                    <span class="season-plant">🎃 Pumpkins</span>
+                    <span class="season-plant">🍎 Apples</span>
+                    <span class="season-plant">🧅 Onions</span>
+                    <span class="season-plant">🧄 Garlic</span>
+                </div>
+            </div>
+            
+            <div class="season-card">
+                <div class="season-header winter">
+                    <div class="season-emoji">❄️</div>
+                    <h3>Winter (Dec-Feb)</h3>
+                </div>
+                <div class="season-plants">
+                    <span class="season-plant">🥬 Kale</span>
+                    <span class="season-plant">🍠 Parsnips</span>
+                    <span class="season-plant">🧅 Leeks</span>
+                    <span class="season-plant">🌱 Broad Beans</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Growing Tips -->
+    <div class="growing-tips">
+        <h2><span class="section-emoji">💡</span> Balbriggan Growing Tips</h2>
+        
+        <div class="tips-grid">
+            <div class="tip-card">
+                <div class="tip-emoji">🌊</div>
+                <h3>Use Coastal Winds</h3>
+                <p>Our sea breeze helps prevent plant diseases - position plants to catch the air</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-emoji">🛡️</div>
+                <h3>Wind Protection</h3>
+                <p>Use hedges or walls to protect tender plants from strong Atlantic winds</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-emoji">💧</div>
+                <h3>Smart Watering</h3>
+                <p>Water in the morning to prevent mildew in our damp climate</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-emoji">🌱</div>
+                <h3>Start Indoors</h3>
+                <p>Start seeds indoors in early spring for a head start on our short growing season</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Local Suppliers -->
+    <div class="suppliers-section">
+        <h2><span class="section-emoji">🛒</span> Local Balbriggan Suppliers</h2>
+        
+        <div class="suppliers-grid">
+            <div class="supplier-card">
+                <div class="supplier-emoji">🏪</div>
+                <h3>Balbriggan Garden Centre</h3>
+                <p>Plants, seeds, and expert advice for local conditions</p>
+                <a href="#" class="supplier-link">📍 Find on Map</a>
+            </div>
+            
+            <div class="supplier-card">
+                <div class="supplier-emoji">🛒</div>
+                <h3>Saturday Farmers Market</h3>
+                <p>Local seedlings and plants every Saturday morning</p>
+                <a href="#" class="supplier-link">📅 Market Times</a>
+            </div>
+            
+            <div class="supplier-card">
+                <div class="supplier-emoji">🌱</div>
+                <h3>Community Seed Bank</h3>
+                <p>Free seeds for local gardeners at the Community Centre</p>
+                <a href="/community" class="supplier-link">👥 Join Us</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Plants Hero */
+.plants-hero {
+    text-align: center;
+    padding: 3rem 1rem;
+    margin-bottom: 3rem;
+}
+
+.hero-emojis {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero-subtitle {
+    color: var(--text-light);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-filters {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--light-gray);
+    border: 2px solid var(--light-gray);
+    border-radius: var(--border-radius-round);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-btn.active {
+    background: var(--primary-green);
+    color: var(--text-on-green);
+    border-color: var(--primary-green);
+}
+
+.filter-btn:hover:not(.active) {
+    border-color: var(--primary-green);
+}
+
+/* Plants Container */
+.plants-container {
+    margin-bottom: 4rem;
+}
+
+.plants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.plant-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.plant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-green);
+}
+
+.plant-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.plant-info h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.plant-description {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.plant-details {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+}
+
+.detail-emoji {
+    font-size: 1.2rem;
+}
+
+.plant-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.difficulty-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-round);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.difficulty-badge.easy {
+    background: var(--light-green);
+    color: var(--text-dark);
+}
+
+.difficulty-badge.medium {
+    background: var(--sunny-yellow);
+    color: var(--text-on-yellow);
+}
+
+.difficulty-badge.hard {
+    background: #ff6b6b;
+    color: white;
+}
+
+.type-badge {
+    background: var(--light-gray);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-round);
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* Seasonal Guide */
+.seasonal-guide {
+    margin-bottom: 4rem;
+    padding: 3rem;
+    background: var(--off-white);
+    border-radius: var(--border-radius);
+}
+
+.section-emoji {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.season-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.season-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+}
+
+.season-header {
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+}
+
+.season-header.spring {
+    background: var(--primary-green);
+}
+
+.season-header.summer {
+    background: var(--sunny-yellow);
+    color: var(--text-on-yellow);
+}
+
+.season-header.autumn {
+    background: #ff9800;
+}
+
+.season-header.winter {
+    background: #2196f3;
+}
+
+.season-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.season-plants {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.season-plant {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.5rem;
+    background: var(--off-white);
+    border-radius: var(--border-radius);
+}
+
+/* Growing Tips */
+.growing-tips {
+    margin-bottom: 4rem;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tip-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+}
+
+.tip-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Suppliers Section */
+.suppliers-section {
+    margin-bottom: 4rem;
+}
+
+.suppliers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.supplier-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+}
+
+.supplier-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.supplier-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.supplier-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .plants-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .season-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .suppliers-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .filter-btn {
+        width: 200px;
+        justify-content: center;
+    }
+    
+    .seasonal-guide {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .plant-details {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .plant-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Plant filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const plantCards = document.querySelectorAll('.plant-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const type = this.dataset.type;
+            
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter plants
+            plantCards.forEach(card => {
+                if (type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // Plant card animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeIn 0.5s ease forwards';
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    plantCards.forEach(card => {
+        observer.observe(card);
+    });
+    
+    // Add CSS for animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .plant-card {
+            opacity: 0;
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
 {% endblock %}
