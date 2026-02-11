@@ -50,6 +50,11 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
+                <!-- Add a play overlay button -->
+                <div class="play-overlay">
+                    <span class="play-icon">▶️</span>
+                    <span class="play-text">Watch Here</span>
+                </div>
             </div>
             <div class="video-info">
                 <div class="video-meta">
@@ -86,8 +91,12 @@
                 </div>
                 
                 <div class="video-actions">
-                    <a href="https://www.youtube.com/@GrowBalbriggan" target="_blank" class="btn">
-                        <span class="btn-emoji">▶️</span> Subscribe on YouTube
+                    <!-- Added Watch Here button as first action -->
+                    <a href="#watch-featured" class="btn btn-primary watch-here-btn">
+                        <span class="btn-emoji">▶️</span> Watch Here
+                    </a>
+                    <a href="https://www.youtube.com/@GrowBalbriggan" target="_blank" class="btn btn-secondary">
+                        <span class="btn-emoji">📺</span> Subscribe on YouTube
                     </a>
                     <button class="btn btn-secondary" id="reminder-btn">
                         <span class="btn-emoji">🔔</span> Set Weekly Reminder
@@ -123,47 +132,52 @@
         </div>
         
         <div class="videos-grid">
-            <!-- Video 1: Tomatoes Seeding -->
-            <div class="video-card" data-difficulty="beginner" data-tags="seeding tomatoes vegetables spring">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/PnggZv73dMM/hqdefault.jpg" alt="Seeding Tomatoes in Balbriggan">
-                    <div class="video-duration">0:58</div>
-                    <div class="difficulty-badge beginner">Beginner</div>
-                    <div class="video-action-badge seeding">🌱 Seeding</div>
-                </div>
-                
-                <div class="video-card-content">
-                    <div class="video-meta-small">
-                        <span class="meta-item">
-                            <span class="meta-emoji">📅</span> Spring Task
-                        </span>
-                        <span class="meta-item">
-                            <span class="meta-emoji">⏰</span> 0:58
-                        </span>
-                    </div>
-                    
-                    <h3>Seeding Tomatoes for Balbriggan 🍅</h3>
-                    <p class="video-description-small">Learn how to start tomato seeds indoors for our coastal climate. Perfect timing for spring planting!</p>
-                    
-                    <div class="video-tags">
-                        <span class="tag">tomatoes</span>
-                        <span class="tag">seeding</span>
-                        <span class="tag">spring</span>
-                        <span class="tag">indoor</span>
-                    </div>
-                    
-                    <div class="video-benefits">
-                        <span class="benefit">🌡️ Start indoors early</span>
-                        <span class="benefit">🌊 Coastal climate tips</span>
-                    </div>
-                    
-                    <a href="https://www.youtube.com/shorts/PnggZv73dMM" 
-                       target="_blank" 
-                       class="watch-btn">
-                        <span class="btn-emoji">▶️</span> Watch Tutorial
-                    </a>
-                </div>
-            </div>
+<!-- Video 1: Tomatoes Seeding -->
+<div class="video-card" data-difficulty="beginner" data-tags="seeding tomatoes vegetables spring">
+    <div class="video-thumbnail">
+        <img src="https://img.youtube.com/vi/PnggZv73dMM/hqdefault.jpg" alt="Seeding Tomatoes in Balbriggan">
+        <div class="video-duration">0:58</div>
+        <div class="difficulty-badge beginner">Beginner</div>
+        <div class="video-action-badge seeding">🌱 Seeding</div>
+        <!-- Add play overlay on thumbnail -->
+        <div class="thumbnail-overlay">
+            <span class="play-icon-small">▶️</span>
+        </div>
+    </div>
+    
+    <div class="video-card-content">
+        <div class="video-meta-small">
+            <span class="meta-item">
+                <span class="meta-emoji">📅</span> Spring Task
+            </span>
+            <span class="meta-item">
+                <span class="meta-emoji">⏰</span> 0:58
+            </span>
+        </div>
+        
+        <h3>Seeding Tomatoes for Balbriggan 🍅</h3>
+        <p class="video-description-small">Learn how to start tomato seeds indoors for our coastal climate. Perfect timing for spring planting!</p>
+        
+        <div class="video-tags">
+            <span class="tag">tomatoes</span>
+            <span class="tag">seeding</span>
+            <span class="tag">spring</span>
+            <span class="tag">indoor</span>
+        </div>
+        
+        <div class="video-benefits">
+            <span class="benefit">🌡️ Start indoors early</span>
+            <span class="benefit">🌊 Coastal climate tips</span>
+        </div>
+        
+        <!-- CORRECTED: Single watch button with "Watch Here" -->
+        <a href="https://www.youtube.com/shorts/PnggZv73dMM" 
+           target="_blank" 
+           class="watch-btn">
+            <span class="btn-emoji">▶️</span> Watch Here
+        </a>
+    </div>
+</div>
             
             <!-- Video 2: Carrots Seeding -->
             <div class="video-card" data-difficulty="beginner" data-tags="seeding carrots root-vegetables easy">
@@ -202,6 +216,7 @@
                     <a href="https://www.youtube.com/shorts/N-V3loV3gYA" 
                        target="_blank" 
                        class="watch-btn">
+                        <span class="btn-emoji">▶️</span> Watch Here
                         <span class="btn-emoji">▶️</span> Watch Tutorial
                     </a>
                 </div>
@@ -244,6 +259,7 @@
                     <a href="https://www.youtube.com/shorts/Idv5MSQlb08" 
                        target="_blank" 
                        class="watch-btn">
+                        <span class="btn-emoji">▶️</span> Watch Here
                         <span class="btn-emoji">▶️</span> Watch Tutorial
                     </a>
                 </div>
@@ -286,6 +302,7 @@
                     <a href="https://www.youtube.com/shorts/-jB5dh575Wg" 
                        target="_blank" 
                        class="watch-btn">
+                        <span class="btn-emoji">▶️</span> Watch Here
                         <span class="btn-emoji">▶️</span> Watch Tutorial
                     </a>
                 </div>
