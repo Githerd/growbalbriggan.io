@@ -40,6 +40,7 @@ def load_plants_data():
         with open('data/plants.json', 'r', encoding='utf-8') as f:
             return json.load(f)
     except:
+        # Return default plants if file not found - UPDATED VERSION
         return [
             {
                 "id": 1,
@@ -50,6 +51,16 @@ def load_plants_data():
                 "emoji": "🌊",
                 "difficulty": "easy",
                 "type": "vegetable"
+            },
+            {
+                "id": 2,
+                "name": "Balbriggan Berries",
+                "description": "Strawberries & raspberries thrive in our microclimate.",
+                "sun": "6+ hours",
+                "planting_time": "March-May",
+                "emoji": "🍓",
+                "difficulty": "medium",
+                "type": "fruit"
             }
         ]
 
