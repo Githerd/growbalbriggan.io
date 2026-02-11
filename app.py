@@ -23,7 +23,6 @@ def load_gardening_tips():
         with open('data/tips.json', 'r', encoding='utf-8') as f:
             return json.load(f)
     except:
-        # Return default tips if file not found
         return [
             {
                 "id": 1,
@@ -33,15 +32,6 @@ def load_gardening_tips():
                 "emoji": "🌱",
                 "icon": "fas fa-seedling",
                 "seasonal": False
-            },
-            {
-                "id": 2,
-                "title": "Balbriggan Soil",
-                "description": "Our coastal soil benefits from added compost for better drainage",
-                "season": "Spring",
-                "emoji": "🌊",
-                "icon": "fas fa-water",
-                "seasonal": True
             }
         ]
 
@@ -50,7 +40,6 @@ def load_plants_data():
         with open('data/plants.json', 'r', encoding='utf-8') as f:
             return json.load(f)
     except:
-        # Return default plants if file not found
         return [
             {
                 "id": 1,
@@ -61,16 +50,26 @@ def load_plants_data():
                 "emoji": "🌊",
                 "difficulty": "easy",
                 "type": "vegetable"
-            },
+            }
+        ]
+
+def load_video_classes():
+    try:
+        with open('data/videos.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except:
+        return [
             {
-                "id": 2,
-                "name": "Balbriggan Berries",
-                "description": "Strawberries & raspberries thrive in our microclimate.",
-                "sun": "6+ hours",
-                "planting_time": "March-May",
-                "emoji": "🍓",
-                "difficulty": "medium",
-                "type": "fruit"
+                "id": 1,
+                "title": "Getting Started with Balcony Gardening",
+                "description": "Learn how to grow food in small spaces in Balbriggan",
+                "date": "2024-03-15",
+                "duration": "25:30",
+                "youtube_id": "dQw4w9WgXcQ",
+                "instructor": "Sarah O'Connor",
+                "difficulty": "beginner",
+                "tags": ["balcony", "containers", "beginners"],
+                "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
             }
         ]
 
@@ -79,18 +78,20 @@ def load_balbriggan_events():
         {"date": "Weekly", "event": "Community Garden Volunteering", "emoji": "👨‍🌾", "location": "Town Park"},
         {"date": "Saturdays", "event": "Balbriggan Farmers Market", "emoji": "🛒", "location": "Market Square"},
         {"date": "Monthly", "event": "Seed Swap & Plant Share", "emoji": "🌱", "location": "Community Centre"},
-        {"date": "Seasonal", "event": "Coastal Foraging Walks", "emoji": "🌊", "location": "Harbour"},
     ]
 
 @app.route('/')
 def home():
+    # Redirect to videos page as new homepage
+    return redirect(url_for('videos_page'))
+
+@app.route('/videos')
+def videos_page():
+    videos = load_video_classes()
     tips = load_gardening_tips()
-    plants = load_plants_data()
-    events = load_balbriggan_events()
-    return render_template('index.html', 
-                         tips=tips[:3], 
-                         plants=plants[:4],
-                         events=events[:3],
+    return render_template('videos.html', 
+                         videos=videos,
+                         tips=tips[:2],
                          balbriggan=BALBRIGGAN_INFO)
 
 @app.route('/tips')
@@ -108,7 +109,6 @@ def seasonal_page():
     tips = load_gardening_tips()
     seasonal_tips = [tip for tip in tips if tip.get('seasonal')]
     
-    # Get current month for Balbriggan
     current_month = datetime.now().strftime("%B")
     month_emoji = {
         "January": "❄️", "February": "🌨️", "March": "🌱", "April": "🌸",
@@ -134,13 +134,24 @@ def contact():
         email = request.form.get('email')
         message = request.form.get('message')
         
-        # In a real app, save to database or send email
         print(f"Contact from {name}: {email} - {message}")
-        
         flash("🎉 Thanks for reaching out! We'll get back to you soon!", "success")
         return redirect(url_for('contact'))
     
     return render_template('contact.html', balbriggan=BALBRIGGAN_INFO)
+
+# New legal pages
+@app.route('/privacy')
+def privacy_page():
+    return render_template('privacy.html', balbriggan=BALBRIGGAN_INFO)
+
+@app.route('/terms')
+def terms_page():
+    return render_template('terms.html', balbriggan=BALBRIGGAN_INFO)
+
+@app.route('/rules')
+def rules_page():
+    return render_template('rules.html', balbriggan=BALBRIGGAN_INFO)
 
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
@@ -151,18 +162,24 @@ def subscribe():
     else:
         flash("Please enter a valid email address", "error")
     
-    return redirect(request.referrer or url_for('home'))
+    return redirect(request.referrer or url_for('videos_page'))
 
+# API endpoints
 @app.route('/api/tips')
 def api_tips():
     tips = load_gardening_tips()
     return jsonify(tips)
 
-@app.route('/api/tips/<season>')
-def api_seasonal_tips(season):
-    tips = load_gardening_tips()
-    seasonal_tips = [tip for tip in tips if tip.get('season', '').lower() == season.lower()]
-    return jsonify(seasonal_tips)
+@app.route('/api/videos')
+def api_videos():
+    videos = load_video_classes()
+    return jsonify(videos)
+
+@app.route('/api/videos/<difficulty>')
+def api_videos_by_difficulty(difficulty):
+    videos = load_video_classes()
+    filtered = [v for v in videos if v.get('difficulty') == difficulty]
+    return jsonify(filtered)
 
 @app.route('/api/balbriggan-events')
 def api_events():
