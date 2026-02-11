@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = 'growbalbriggan-secret-key-2024'
+app.secret_key = os.environ.get('SECRET_KEY', 'growbalbriggan-secret-key-2024')
 
 # Balbriggan-specific data
 BALBRIGGAN_INFO = {
@@ -19,12 +19,60 @@ BALBRIGGAN_INFO = {
 }
 
 def load_gardening_tips():
-    with open('data/tips.json', 'r', encoding='utf-8') as f:
-        return json.load(f)
+    try:
+        with open('data/tips.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except:
+        # Return default tips if file not found
+        return [
+            {
+                "id": 1,
+                "title": "Start Small",
+                "description": "Begin with herbs in containers on your balcony or windowsill",
+                "season": "All Year",
+                "emoji": "🌱",
+                "icon": "fas fa-seedling",
+                "seasonal": False
+            },
+            {
+                "id": 2,
+                "title": "Balbriggan Soil",
+                "description": "Our coastal soil benefits from added compost for better drainage",
+                "season": "Spring",
+                "emoji": "🌊",
+                "icon": "fas fa-water",
+                "seasonal": True
+            }
+        ]
 
 def load_plants_data():
-    with open('data/plants.json', 'r', encoding='utf-8') as f:
-        return json.load(f)
+    try:
+        with open('data/plants.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except:
+        # Return default plants if file not found
+        return [
+            {
+                "id": 1,
+                "name": "Sea Kale",
+                "description": "Loves our coastal breeze! Edible and beautiful.",
+                "sun": "Full Sun",
+                "planting_time": "Spring",
+                "emoji": "🌊",
+                "difficulty": "easy",
+                "type": "vegetable"
+            },
+            {
+                "id": 2,
+                "name": "Balbriggan Berries",
+                "description": "Strawberries & raspberries thrive in our microclimate.",
+                "sun": "6+ hours",
+                "planting_time": "March-May",
+                "emoji": "🍓",
+                "difficulty": "medium",
+                "type": "fruit"
+            }
+        ]
 
 def load_balbriggan_events():
     return [
@@ -86,8 +134,8 @@ def contact():
         email = request.form.get('email')
         message = request.form.get('message')
         
-        # Simulate saving contact
-        print(f"New contact from {name} ({email}): {message}")
+        # In a real app, save to database or send email
+        print(f"Contact from {name}: {email} - {message}")
         
         flash("🎉 Thanks for reaching out! We'll get back to you soon!", "success")
         return redirect(url_for('contact'))
@@ -98,9 +146,8 @@ def contact():
 def subscribe():
     email = request.form.get('email')
     if email:
-        # Simulate saving subscription
         print(f"New subscriber: {email}")
-        flash(f"🌱 Welcome to GrowBalbriggan! Check your email for a welcome gift!", "success")
+        flash(f"🌱 Welcome to GrowBalbriggan! Check your email for gardening tips!", "success")
     else:
         flash("Please enter a valid email address", "error")
     
@@ -122,6 +169,10 @@ def api_events():
     events = load_balbriggan_events()
     return jsonify(events)
 
+@app.route('/health')
+def health_check():
+    return jsonify({"status": "healthy", "service": "GrowBalbriggan"})
+
 # Error handlers
 @app.errorhandler(404)
 def page_not_found(e):
@@ -131,5 +182,13 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('500.html', balbriggan=BALBRIGGAN_INFO), 500
 
+# Create necessary directories on startup
+def create_directories():
+    directories = ['data', 'static/images', 'templates']
+    for directory in directories:
+        os.makedirs(directory, exist_ok=True)
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    create_directories()
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
