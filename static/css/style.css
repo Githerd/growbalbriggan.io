@@ -394,6 +394,154 @@ strong, b {
     text-align: center;
 }
 
+/* ============================================
+   BLACK "GROW" TEXT FIXES
+   ============================================ */
+
+/* 1. Newsletter Section - "Stay in the Grow!" */
+.newsletter-content h2 {
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+    color: var(--text-on-green) !important;
+    position: relative;
+    display: inline-block;
+}
+
+.newsletter-content h2 span.newsletter-grow {
+    color: #000000 !important;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+    font-weight: 800;
+    position: relative;
+    display: inline-block;
+    padding: 0 2px;
+}
+
+.newsletter-content h2 span.newsletter-grow::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 2px;
+    right: 2px;
+    height: 2px;
+    background: var(--gradient-blossom);
+    border-radius: 1px;
+}
+
+/* 2. Footer Logo - "GrowBalbriggan" */
+.footer-logo .logo-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+}
+
+.footer-logo .logo-highlight-black {
+    color: #000000 !important;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+    font-weight: 800;
+    position: relative;
+    margin-right: 2px;
+}
+
+.footer-logo .logo-highlight-black::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-blossom);
+    border-radius: 1px;
+}
+
+.footer-logo .logo-balbriggan {
+    color: var(--text-on-green);
+    font-weight: 700;
+}
+
+/* 3. Main navigation logo (keep as is) */
+.navbar .logo .logo-highlight {
+    color: var(--primary-green);
+    position: relative;
+}
+
+.navbar .logo .logo-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-sunrise);
+    border-radius: 2px;
+}
+
+/* 4. Make sure other instances of "Grow" in gradients are not affected */
+h1.gradient-text,
+h2.gradient-text {
+    background: var(--gradient-sunrise);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 5. Ensure good contrast for black text on colored backgrounds */
+.black-on-color {
+    color: #000000 !important;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+    font-weight: 700;
+}
+
+/* 6. Specific fix for newsletter section context */
+.newsletter {
+    background: var(--gradient-dark);
+    color: var(--text-on-green);
+    padding: 4rem 1rem;
+    margin: 4rem 0;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.newsletter-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 7. Specific fix for footer context */
+footer {
+    background: var(--gradient-dark);
+    color: var(--text-on-green);
+    padding: 4rem 0 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+    margin-bottom: 1rem;
+}
+
+/* 8. Responsive adjustments */
+@media (max-width: 768px) {
+    .newsletter-content h2 {
+        font-size: 2rem;
+    }
+    
+    .footer-logo .logo-text {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .newsletter-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .footer-logo .logo-text {
+        font-size: 1.4rem;
+    }
+}
 /* Newsletter - Enhanced text visibility */
 .newsletter {
     background: var(--gradient-dark);
@@ -497,10 +645,6 @@ footer {
 .footer-section a:hover {
     color: var(--sunny-yellow);
     transform: translateX(5px);
-}
-
-.footer-emoji, .contact-emoji, .link-emoji {
-    font-size: 1.2rem;
 }
 
 .social-links {
