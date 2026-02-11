@@ -4,23 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}GrowBalbriggan - Grow Your Garden in North County Dublin{% endblock %}</title>
+    
+    <meta name="description" content="{% block description %}Learn gardening in Balbriggan, North Dublin. Weekly video classes, seasonal tips, plant guides, and community gardening events.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}Balbriggan gardening, Dublin gardening, vegetable growing, community garden, gardening classes, Ireland gardening, beginner gardening{% endblock %}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ self.description() }}{% endblock %}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/growbalbriggan-logo.png', _external=True) }}">
+    <meta property="og:url" content="{{ request.url if request else '' }}">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ self.title() }}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ self.description() }}{% endblock %}">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/growbalbriggan-logo.png', _external=True) }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <a href="/" class="logo">
+            <!-- Logo as home link -->
+            <a href="/" class="logo" aria-label="GrowBalbriggan Home">
                 <span class="logo-emoji">🌱</span>
                 <span class="logo-text">Grow<span class="logo-highlight">Balbriggan</span></span>
             </a>
+            
             <div class="nav-links">
-                <a href="/" {% if request.path == '/' %}class="active"{% endif %}>
-                    <span class="nav-emoji">🏠</span> Home
+                <a href="/videos" {% if request.path == '/videos' %}class="active"{% endif %}>
+                    <span class="nav-emoji">🎥</span> Video Classes
                 </a>
                 <a href="/tips" {% if request.path == '/tips' %}class="active"{% endif %}>
                     <span class="nav-emoji">💡</span> Tips
@@ -38,7 +61,7 @@
                     <span class="nav-emoji">📧</span> Contact
                 </a>
             </div>
-            <button class="menu-toggle">
+            <button class="menu-toggle" aria-label="Toggle menu">
                 <span class="menu-emoji">🍃</span>
             </button>
         </div>
@@ -46,7 +69,7 @@
 
     <!-- Mobile Menu (Hidden by default) -->
     <div class="mobile-menu">
-        <a href="/"><span class="nav-emoji">🏠</span> Home</a>
+        <a href="/videos"><span class="nav-emoji">🎥</span> Video Classes</a>
         <a href="/tips"><span class="nav-emoji">💡</span> Tips</a>
         <a href="/plants"><span class="nav-emoji">🌿</span> Plants</a>
         <a href="/seasonal"><span class="nav-emoji">📅</span> Seasonal</a>
@@ -71,14 +94,14 @@
     </main>
 
     <!-- Newsletter Signup -->
-    <section class="newsletter">
+    <section class="newsletter" aria-label="Newsletter signup">
         <div class="container">
             <div class="newsletter-content">
                 <div class="newsletter-emoji">📬</div>
                 <h2>Stay in the Grow!</h2>
-                <p>Get weekly gardening tips, event updates, and exclusive Balbriggan growing guides</p>
+                <p>Get weekly gardening tips, video class updates, and exclusive Balbriggan growing guides</p>
                 <form action="/subscribe" method="POST" class="newsletter-form">
-                    <input type="email" name="email" placeholder="Your email address" required>
+                    <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
                     <button type="submit" class="btn btn-sparkle">
                         <span class="btn-emoji">✨</span> Subscribe
                     </button>
@@ -99,34 +122,34 @@
                     </div>
                     <p class="footer-tagline">Growing North County Dublin together, one plant at a time! 🌸</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><span class="social-emoji">📸</span></a>
-                        <a href="#" class="social-link"><span class="social-emoji">🐦</span></a>
-                        <a href="#" class="social-link"><span class="social-emoji">📘</span></a>
-                        <a href="#" class="social-link"><span class="social-emoji">🎥</span></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><span class="social-emoji">📸</span></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><span class="social-emoji">🐦</span></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><span class="social-emoji">📘</span></a>
+                        <a href="https://youtube.com/@GrowBalbriggan" class="social-link" aria-label="YouTube"><span class="social-emoji">🎥</span></a>
                     </div>
                 </div>
                 
                 <div class="footer-section">
                     <h3><span class="footer-emoji">📍</span> Balbriggan Hotspots</h3>
-                    <a href="#"><span class="link-emoji">🌳</span> Bremore Castle Gardens</a>
-                    <a href="#"><span class="link-emoji">🛒</span> Balbriggan Market</a>
-                    <a href="#"><span class="link-emoji">🏖️</span> Coastal Growing Tips</a>
-                    <a href="#"><span class="link-emoji">🎯</span> Local Garden Centres</a>
+                    <a href="/community"><span class="link-emoji">🌳</span> Bremore Castle Gardens</a>
+                    <a href="/community"><span class="link-emoji">🛒</span> Saturday Farmers Market</a>
+                    <a href="/seasonal"><span class="link-emoji">🏖️</span> Coastal Growing Tips</a>
+                    <a href="/plants"><span class="link-emoji">🎯</span> Plant Guides</a>
                 </div>
                 
                 <div class="footer-section">
                     <h3><span class="footer-emoji">🚀</span> Quick Grow</h3>
+                    <a href="/videos"><span class="link-emoji">🎥</span> Weekly Classes</a>
                     <a href="/tips"><span class="link-emoji">🌱</span> Beginner's Guide</a>
                     <a href="/seasonal"><span class="link-emoji">📅</span> This Week's Tasks</a>
                     <a href="/community"><span class="link-emoji">👥</span> Weekend Meetup</a>
-                    <a href="/plants"><span class="link-emoji">🌿</span> Plant Finder</a>
                 </div>
                 
                 <div class="footer-section">
-                    <h3><span class="footer-emoji">💬</span> Get in Touch</h3>
-                    <p><span class="contact-emoji">📧</span> hello@growbalbriggan.ie</p>
-                    <p><span class="contact-emoji">📍</span> Community Garden, Balbriggan</p>
-                    <p><span class="contact-emoji">📱</span> Follow #GrowBalbriggan</p>
+                    <h3><span class="footer-emoji">📋</span> Legal & Community</h3>
+                    <a href="/privacy"><span class="link-emoji">🔒</span> Privacy Policy</a>
+                    <a href="/terms"><span class="link-emoji">📝</span> Terms of Service</a>
+                    <a href="/rules"><span class="link-emoji">🤝</span> Community Rules</a>
                     <a href="/contact" class="btn btn-small">
                         <span class="btn-emoji">👋</span> Say Hi!
                     </a>
@@ -139,9 +162,9 @@
                     <p class="footer-inspiration">Inspiring growth in North County Dublin since 2024</p>
                 </div>
                 <div class="footer-legal">
-                    <a href="#">Privacy</a> • 
-                    <a href="#">Terms</a> • 
-                    <a href="#">Community Rules</a> • 
+                    <a href="/privacy">Privacy</a> • 
+                    <a href="/terms">Terms</a> • 
+                    <a href="/rules">Community Rules</a> • 
                     <span class="grow-counter">🌻 {{ "1,234" }} Gardens Growing!</span>
                 </div>
             </div>
