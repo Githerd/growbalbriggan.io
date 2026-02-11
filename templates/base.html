@@ -39,7 +39,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             padding: 0.5rem;
             color: var(--primary-green);
             z-index: 1001;
@@ -48,21 +48,24 @@
         
         .menu-toggle.active {
             transform: rotate(90deg);
+            color: var(--accent-teal);
         }
         
         .mobile-menu {
             position: fixed;
-            top: 70px; /* Height of navbar */
+            top: 70px;
             left: 0;
             width: 100%;
-            background: var(--white);
+            background: linear-gradient(135deg, var(--white), var(--off-white));
             box-shadow: var(--shadow-heavy);
             z-index: 999;
-            transform: translateY(-100%);
+            transform: translateY(-150%);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 1rem 0;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
         }
         
         .mobile-menu.active {
@@ -72,14 +75,19 @@
         }
         
         .mobile-menu a {
-            display: block;
+            display: flex;
+            align-items: center;
             padding: 1rem 2rem;
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s;
-            border-bottom: 1px solid var(--light-gray);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .mobile-menu a:last-child {
+            border-bottom: none;
         }
         
         .mobile-menu a:hover,
@@ -90,20 +98,8 @@
         }
         
         .mobile-menu .nav-emoji {
-            margin-right: 10px;
-        }
-        
-        /* Close button for mobile menu */
-        .mobile-menu-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-light);
-            padding: 0.5rem;
+            margin-right: 12px;
+            font-size: 1.2rem;
         }
         
         /* Backdrop overlay */
@@ -114,6 +110,7 @@
             width: 100%;
             height: calc(100vh - 70px);
             background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
             z-index: 998;
             opacity: 0;
             visibility: hidden;
@@ -128,11 +125,11 @@
         /* Responsive Navbar */
         @media (max-width: 992px) {
             .nav-links {
-                display: none;
+                display: none !important;
             }
             
             .menu-toggle {
-                display: flex;
+                display: flex !important;
                 align-items: center;
                 justify-content: center;
             }
@@ -144,10 +141,17 @@
                 background: var(--white);
                 box-shadow: var(--shadow-light);
             }
+            
+            .navbar .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
         }
         
         @media (min-width: 993px) {
-            .mobile-menu {
+            .mobile-menu,
+            .menu-backdrop {
                 display: none !important;
             }
         }
@@ -157,36 +161,42 @@
             overflow: hidden;
         }
         
-        /* Animation for menu toggle icon */
-        @keyframes menuToggleRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(90deg); }
+        /* Menu icon animation */
+        .menu-icon {
+            display: inline-block;
+            transition: all 0.3s;
         }
         
-        /* Mobile menu animation */
-        @keyframes slideDown {
+        .menu-toggle.active .menu-icon {
+            transform: scale(0.9);
+        }
+        
+        /* Animation for mobile menu items */
+        @keyframes slideIn {
             from {
-                transform: translateY(-20px);
+                transform: translateX(-20px);
                 opacity: 0;
             }
             to {
-                transform: translateY(0);
+                transform: translateX(0);
                 opacity: 1;
             }
         }
         
-        .mobile-menu a {
-            animation: slideDown 0.3s ease-out forwards;
+        .mobile-menu.active a {
+            animation: slideIn 0.3s ease-out forwards;
             opacity: 0;
         }
         
-        .mobile-menu a:nth-child(1) { animation-delay: 0.1s; }
-        .mobile-menu a:nth-child(2) { animation-delay: 0.15s; }
-        .mobile-menu a:nth-child(3) { animation-delay: 0.2s; }
-        .mobile-menu a:nth-child(4) { animation-delay: 0.25s; }
-        .mobile-menu a:nth-child(5) { animation-delay: 0.3s; }
-        .mobile-menu a:nth-child(6) { animation-delay: 0.35s; }
+        .mobile-menu.active a:nth-child(1) { animation-delay: 0.1s; }
+        .mobile-menu.active a:nth-child(2) { animation-delay: 0.15s; }
+        .mobile-menu.active a:nth-child(3) { animation-delay: 0.2s; }
+        .mobile-menu.active a:nth-child(4) { animation-delay: 0.25s; }
+        .mobile-menu.active a:nth-child(5) { animation-delay: 0.3s; }
+        .mobile-menu.active a:nth-child(6) { animation-delay: 0.35s; }
     </style>
+    
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <!-- Navigation -->
@@ -198,6 +208,7 @@
                 <span class="logo-text">Grow<span class="logo-highlight">Balbriggan</span></span>
             </a>
             
+            <!-- Desktop Navigation -->
             <div class="nav-links">
                 <a href="/videos" {% if request.path == '/videos' %}class="active"{% endif %}>
                     <span class="nav-emoji">🎥</span> Video Classes
@@ -219,7 +230,7 @@
                 </a>
             </div>
             
-            <!-- Updated menu toggle button -->
+            <!-- Mobile Menu Toggle Button -->
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span class="menu-icon">☰</span>
             </button>
@@ -391,14 +402,21 @@
             }
             
             // Event listeners
-            menuToggle.addEventListener('click', toggleMenu);
-            menuBackdrop.addEventListener('click', closeMenu);
+            if (menuToggle) {
+                menuToggle.addEventListener('click', toggleMenu);
+            }
+            
+            if (menuBackdrop) {
+                menuBackdrop.addEventListener('click', closeMenu);
+            }
             
             // Close menu when clicking on a link
-            const mobileLinks = mobileMenu.querySelectorAll('a');
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
+            if (mobileMenu) {
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+            }
             
             // Close menu on escape key
             document.addEventListener('keydown', function(e) {
@@ -414,26 +432,13 @@
                 }
             });
             
-            // Add smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+            // Set active class based on current URL
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
             });
-            
-            // Update menu toggle accessibility
-            menuToggle.setAttribute('aria-label', 'Toggle navigation menu');
-            menuToggle.setAttribute('aria-controls', 'mobileMenu');
         });
     </script>
     
