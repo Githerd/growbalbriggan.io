@@ -1,0 +1,1212 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - GrowBalbriggan | Get Gardening Help in North Dublin{% endblock %}
+
+{% block description %}Get in touch with Balbriggan's gardening community! Ask questions, join events, or share your growing wins.{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Contact Hero -->
+    <div class="contact-hero">
+        <div class="hero-emojis">📧🌱🤝</div>
+        <h1>Let's Grow Together!</h1>
+        <p class="subtitle">Need gardening help? Want to join our community? Have an amazing growing story to share? We're all ears!</p>
+        
+        <div class="contact-stats">
+            <div class="stat">
+                <div class="stat-number">📞</div>
+                <div class="stat-text">Quick Replies</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">👥</div>
+                <div class="stat-text">500+ Gardeners</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">💚</div>
+                <div class="stat-text">Always Helpful</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Grid -->
+    <div class="contact-grid">
+        <!-- WhatsApp Card (Primary) -->
+        <div class="contact-card whatsapp-card">
+            <div class="card-badge">🔥 FASTEST RESPONSE</div>
+            <h3><span class="card-emoji">💬</span> WhatsApp Community</h3>
+            <p>Join 300+ local gardeners for instant help and daily chats!</p>
+            
+            <a href="#" class="contact-action whatsapp-action" id="whatsapp-join">
+                <div class="action-icon">📱</div>
+                <div class="action-content">
+                    <div class="action-title">Join GrowBalbriggan Chat</div>
+                    <div class="action-subtitle">Live advice, photo sharing, local tips</div>
+                </div>
+                <div class="action-arrow">→</div>
+            </a>
+            
+            <div class="response-info">
+                <div class="response-item">
+                    <div class="response-time">Instant</div>
+                    <div class="response-label">Live Chat</div>
+                </div>
+                <div class="response-item">
+                    <div class="response-time">Active</div>
+                    <div class="response-label">24/7 Community</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Card -->
+        <div class="contact-card email-card">
+            <h3><span class="card-emoji">📧</span> Send Us an Email</h3>
+            <p>Perfect for detailed questions, event suggestions, or partnership ideas</p>
+            
+            <div class="email-options">
+                <div class="email-option">
+                    <div class="option-emoji">🌱</div>
+                    <div class="option-content">
+                        <h4>General Questions</h4>
+                        <p>Plant problems, growing advice, Balbriggan tips</p>
+                        <a href="mailto:hello@growbalbriggan.ie" class="email-link">hello@growbalbriggan.ie</a>
+                    </div>
+                </div>
+                
+                <div class="email-option">
+                    <div class="option-emoji">👥</div>
+                    <div class="option-content">
+                        <h4>Community Events</h4>
+                        <p>Host a workshop, suggest an event, volunteer</p>
+                        <a href="mailto:events@growbalbriggan.ie" class="email-link">events@growbalbriggan.ie</a>
+                    </div>
+                </div>
+                
+                <div class="email-option">
+                    <div class="option-emoji">🤝</div>
+                    <div class="option-content">
+                        <h4>Partnerships</h4>
+                        <p>Local businesses, sponsorships, collaborations</p>
+                        <a href="mailto:partners@growbalbriggan.ie" class="email-link">partners@growbalbriggan.ie</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Ad Section -->
+    <div class="community-ad-section">
+        <div class="ad-label">
+            <span class="ad-label-emoji">🌟</span> Community Partner
+        </div>
+        
+        <div class="ad-content">
+            <!-- Featured Partner -->
+            <div class="featured-ad">
+                <div class="ad-badge">LOCAL FAVOURITE</div>
+                <div class="ad-main">
+                    <div class="ad-icon">
+                        <div class="icon-circle" style="background: linear-gradient(135deg, #00c853, #64dd17);">
+                            <span class="icon-emoji">🛒</span>
+                        </div>
+                    </div>
+                    <div class="ad-details">
+                        <h4>Balbriggan Farmers Market</h4>
+                        <p class="ad-tagline">Fresh Plants Every Saturday!</p>
+                        <p class="ad-description">Get local seedlings, expert advice, and community vibes at our weekly market.</p>
+                        <div class="ad-info">
+                            <span class="info-item">📍 Market Square</span>
+                            <span class="info-item">⏰ Sat 9AM-2PM</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/balbriggan-market" target="_blank" class="ad-cta">
+                            <span class="cta-emoji">🗺️</span> Find Us →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ad Space -->
+            <div class="ad-space">
+                <div class="space-icon">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #ff6b6b, #ff4757);">
+                        <span class="icon-emoji">📢</span>
+                    </div>
+                </div>
+                <div class="space-details">
+                    <h4>Your Business Here</h4>
+                    <p>Reach 500+ passionate gardeners in North Dublin</p>
+                    <div class="space-stats">
+                        <span class="stat">🌱 Garden-Focused</span>
+                        <span class="stat">📍 Local Audience</span>
+                        <span class="stat">👥 Engaged Community</span>
+                    </div>
+                    <a href="mailto:partners@growbalbriggan.ie?subject=Advertising%20Inquiry" class="space-cta">
+                        <span class="cta-emoji">💼</span> Partner With Us →
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ad-disclosure">
+            <p><span class="disclosure-emoji">💡</span> Supporting local Balbriggan businesses helps our community grow!</p>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form-section">
+        <div class="form-header">
+            <h2><span class="header-emoji">✍️</span> Send Us a Message</h2>
+            <p>Fill out this form and we'll get back to you within 24 hours!</p>
+        </div>
+        
+        <form class="contact-form" id="garden-contact-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">
+                        <span class="label-emoji">👤</span> Your Name
+                    </label>
+                    <input type="text" id="name" placeholder="e.g., Sarah from Millfield" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">
+                        <span class="label-emoji">📧</span> Email Address
+                    </label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">
+                    <span class="label-emoji">🎯</span> What's this about?
+                </label>
+                <select id="subject" required>
+                    <option value="">Choose a topic</option>
+                    <option value="plant-help">🌱 Plant Help Needed</option>
+                    <option value="community">👥 Community Question</option>
+                    <option value="event">🎪 Event Suggestion</option>
+                    <option value="business">💼 Business Partnership</option>
+                    <option value="other">💬 Just Saying Hi!</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="location">
+                    <span class="label-emoji">📍</span> Your Balbriggan Area
+                </label>
+                <select id="location">
+                    <option value="">Where in Balbriggan are you?</option>
+                    <option value="harbour">🌊 Harbour / Seapoint</option>
+                    <option value="millfield">🏘️ Millfield</option>
+                    <option value="town-centre">🏪 Town Centre</option>
+                    <option value="bremore">🏰 Bremore Area</option>
+                    <option value="other">📍 Other North Dublin</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">
+                    <span class="label-emoji">💭</span> Your Message
+                </label>
+                <textarea id="message" placeholder="Tell us about your garden, ask a question, or share an idea!" rows="5" required></textarea>
+                <div class="textarea-hint">
+                    <span class="hint-emoji">💡</span> Pro tip: Include photos when you email us!
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit">
+                    <span class="btn-emoji">🚀</span> Send Message
+                </button>
+                <p class="form-note">
+                    <span class="note-emoji">⏰</span> We reply within 24 hours, Mon-Fri
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Response Times -->
+    <div class="response-times-card">
+        <h3><span class="card-emoji">⏱️</span> When You'll Hear Back</h3>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-badge immediate">NOW</div>
+                <div class="timeline-content">
+                    <h4>WhatsApp Community</h4>
+                    <p>Instant replies from fellow gardeners</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-badge fast">24H</div>
+                <div class="timeline-content">
+                    <h4>Email Inquiries</h4>
+                    <p>Next business day response</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-badge medium">48H</div>
+                <div class="timeline-content">
+                    <h4>Event Questions</h4>
+                    <p>Weekend event coordination</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-badge longer">1W</div>
+                <div class="timeline-content">
+                    <h4>Partnership Proposals</h4>
+                    <p>Detailed review and response</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Help -->
+    <div class="quick-help">
+        <h3><span class="card-emoji">🚀</span> Need Quick Gardening Help?</h3>
+        
+        <div class="help-options">
+            <a href="/tips" class="help-option">
+                <div class="option-emoji">💡</div>
+                <div class="option-content">
+                    <h4>Browse Tips</h4>
+                    <p>Instant gardening advice</p>
+                </div>
+            </a>
+            
+            <a href="/plants" class="help-option">
+                <div class="option-emoji">🌿</div>
+                <div class="option-content">
+                    <h4>Plant Guide</h4>
+                    <p>What grows in Balbriggan</p>
+                </div>
+            </a>
+            
+            <a href="/seasonal" class="help-option">
+                <div class="option-emoji">📅</div>
+                <div class="option-content">
+                    <h4>Seasonal Calendar</h4>
+                    <p>What to do right now</p>
+                </div>
+            </a>
+            
+            <a href="/community" class="help-option">
+                <div class="option-emoji">👥</div>
+                <div class="option-content">
+                    <h4>Saturday Market</h4>
+                    <p>Get face-to-face help</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+        <h3><span class="card-emoji">❓</span> Frequently Asked Questions</h3>
+        
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>
+                    <span class="faq-emoji">🌱</span> I'm a complete beginner - where do I start?
+                </summary>
+                <div class="faq-answer">
+                    <p>Welcome! 🎉 Start with our <a href="/tips">beginner tips</a> and join the WhatsApp group for instant help. Come to a Saturday market - we love helping new gardeners!</p>
+                </div>
+            </details>
+            
+            <details class="faq-item">
+                <summary>
+                    <span class="faq-emoji">👥</span> How do I join the community garden?
+                </summary>
+                <div class="faq-answer">
+                    <p>Just show up! The Town Park community garden is open daily. Volunteers are there most mornings - introduce yourself!</p>
+                </div>
+            </details>
+            
+            <details class="faq-item">
+                <summary>
+                    <span class="faq-emoji">🎪</span> Can I host a workshop or event?
+                </summary>
+                <div class="faq-answer">
+                    <p>Absolutely! Email <a href="mailto:events@growbalbriggan.ie">events@growbalbriggan.ie</a> with your idea. We love community-led events!</p>
+                </div>
+            </details>
+            
+            <details class="faq-item">
+                <summary>
+                    <span class="faq-emoji">🏪</span> Are there discounts for local businesses?
+                </summary>
+                <div class="faq-answer">
+                    <p>Yes! We offer special rates for Balbriggan businesses. Email <a href="mailto:partners@growbalbriggan.ie">partners@growbalbriggan.ie</a> for our local business package.</p>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <!-- Final CTA -->
+    <div class="final-cta">
+        <div class="cta-content">
+            <div class="cta-emojis">🌱💚👥</div>
+            <h2>Ready to Grow With Us?</h2>
+            <p>Join 500+ gardeners making Balbriggan greener every day!</p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" id="join-whatsapp-btn">
+                    <span class="btn-emoji">💬</span> Join WhatsApp Group
+                </a>
+                <a href="mailto:hello@growbalbriggan.ie" class="btn btn-secondary">
+                    <span class="btn-emoji">📧</span> Send Us an Email
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Back to Top -->
+<button id="back-to-top" aria-label="Back to top">
+    <span class="back-emoji">↑</span>
+</button>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Contact Hero */
+.contact-hero {
+    text-align: center;
+    padding: 3rem 1rem;
+    margin-bottom: 3rem;
+}
+
+.hero-emojis {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.contact-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-text {
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+/* Contact Grid */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Contact Cards */
+.contact-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: transform 0.3s;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-badge {
+    background: var(--gradient-blossom);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-round);
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.card-emoji {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+/* WhatsApp Card */
+.whatsapp-card {
+    border: 2px solid #25D366;
+    position: relative;
+    overflow: hidden;
+}
+
+.whatsapp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #25D36622, transparent);
+    border-radius: 0 0 0 100%;
+}
+
+.whatsapp-action {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    margin: 1.5rem 0;
+    transition: all 0.3s;
+}
+
+.whatsapp-action:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.action-icon {
+    font-size: 2.5rem;
+}
+
+.action-content {
+    flex: 1;
+}
+
+.action-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.action-subtitle {
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+.action-arrow {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Email Card */
+.email-options {
+    margin-top: 1.5rem;
+}
+
+.email-option {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+    transition: background 0.3s;
+}
+
+.email-option:hover {
+    background: var(--gradient-ocean);
+    color: white;
+}
+
+.email-option:hover .email-link {
+    color: white;
+}
+
+.option-emoji {
+    font-size: 2rem;
+}
+
+.option-content h4 {
+    margin-bottom: 0.25rem;
+}
+
+.email-link {
+    color: var(--primary-green);
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+/* Response Info */
+.response-info {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.response-item {
+    text-align: center;
+}
+
+.response-time {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 0.25rem;
+}
+
+.response-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Community Ad Section */
+.community-ad-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+}
+
+.ad-label {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.ad-label-emoji {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+.ad-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .ad-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Featured Ad */
+.featured-ad {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: var(--shadow-light);
+}
+
+.ad-badge {
+    position: absolute;
+    top: -10px;
+    left: 1.5rem;
+    background: var(--sunny-yellow);
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-round);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.ad-main {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-emoji {
+    font-size: 2rem;
+}
+
+.ad-tagline {
+    color: var(--primary-green);
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.ad-info {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    background: var(--light-gray);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-round);
+    font-size: 0.9rem;
+}
+
+.ad-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--primary-green);
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+/* Ad Space */
+.ad-space {
+    background: var(--white);
+    border: 2px dashed var(--primary-green);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.space-icon {
+    margin-bottom: 1rem;
+}
+
+.space-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: var(--light-gray);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-round);
+    font-size: 0.9rem;
+}
+
+.space-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--primary-green);
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+.ad-disclosure {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--light-gray);
+    color: var(--text-light);
+}
+
+.disclosure-emoji {
+    margin-right: 5px;
+}
+
+/* Contact Form */
+.contact-form-section {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    margin: 3rem 0;
+    box-shadow: var(--shadow-light);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header-emoji {
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.label-emoji {
+    font-size: 1.2rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.1);
+}
+
+.textarea-hint {
+    margin-top: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.hint-emoji {
+    margin-right: 5px;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-submit {
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+}
+
+.form-note {
+    margin-top: 1rem;
+    color: var(--text-light);
+}
+
+.note-emoji {
+    margin-right: 5px;
+}
+
+/* Response Times Card */
+.response-times-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    margin: 3rem 0;
+    box-shadow: var(--shadow-light);
+}
+
+.timeline {
+    position: relative;
+    margin-top: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--light-gray);
+}
+
+.timeline-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.timeline-badge {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: white;
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.timeline-badge.immediate {
+    background: var(--primary-green);
+}
+
+.timeline-badge.fast {
+    background: var(--secondary-green);
+}
+
+.timeline-badge.medium {
+    background: var(--accent-teal);
+}
+
+.timeline-badge.longer {
+    background: var(--sky-blue);
+}
+
+.timeline-content {
+    flex: 1;
+    padding: 1rem;
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+}
+
+/* Quick Help */
+.quick-help {
+    margin: 3rem 0;
+}
+
+.help-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.help-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.3s;
+    box-shadow: var(--shadow-light);
+}
+
+.help-option:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+    color: var(--primary-green);
+}
+
+.option-emoji {
+    font-size: 2rem;
+}
+
+/* FAQ */
+.faq-section {
+    margin: 3rem 0;
+}
+
+.faq-list {
+    margin-top: 1.5rem;
+}
+
+.faq-item {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+}
+
+.faq-item summary {
+    padding: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    transition: background 0.3s;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: '➕';
+    margin-left: auto;
+    transition: transform 0.3s;
+}
+
+.faq-item[open] summary::after {
+    content: '➖';
+}
+
+.faq-item summary:hover {
+    background: var(--light-gray);
+}
+
+.faq-answer {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.faq-answer a {
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+/* Final CTA */
+.final-cta {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--gradient-ocean);
+    color: white;
+    border-radius: var(--border-radius);
+    margin: 3rem 0;
+}
+
+.cta-emojis {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background: var(--sunny-yellow);
+    color: var(--text-dark);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+}
+
+/* Back to Top */
+#back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: none;
+    z-index: 1000;
+    box-shadow: var(--shadow-medium);
+    transition: all 0.3s;
+}
+
+#back-to-top:hover {
+    transform: scale(1.1);
+}
+
+.back-emoji {
+    display: block;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // WhatsApp Join Functionality
+    const whatsappLinks = document.querySelectorAll('#whatsapp-join, #join-whatsapp-btn');
+    whatsappLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // WhatsApp group link (replace with actual link)
+            const whatsappLink = "https://chat.whatsapp.com/your-actual-group-link";
+            const message = "🌱 Welcome to GrowBalbriggan's WhatsApp community!\n\nJoin here: " + whatsappLink + "\n\nRules: Be kind, share photos, ask questions!";
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Join GrowBalbriggan WhatsApp',
+                    text: message
+                });
+            } else {
+                // Copy to clipboard
+                navigator.clipboard.writeText(whatsappLink).then(() => {
+                    alert('📱 WhatsApp link copied! Paste it in your browser to join our community of 300+ Balbriggan gardeners!');
+                });
+            }
+        });
+    });
+    
+    // Contact Form Submission
+    const contactForm = document.getElementById('garden-contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+            
+            // Simple validation
+            if (!name || !email || !subject || !message) {
+                showNotification('Please fill in all required fields! 🌱', 'error');
+                return;
+            }
+            
+            // In a real app, you would send this to your backend
+            // For now, simulate success
+            showNotification(`🎉 Thanks ${name}! We'll get back to you within 24 hours! Check your email at ${email}`, 'success');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // Notification function
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 4.7s forwards;
+            box-shadow: var(--shadow-heavy);
+        `;
+        
+        if (type === 'success') {
+            notification.style.background = 'var(--primary-green)';
+        } else {
+            notification.style.background = 'var(--sunny-yellow)';
+            notification.style.color = 'var(--text-dark)';
+        }
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 5000);
+    }
+    
+    // Back to Top functionality
+    const backToTopBtn = document.getElementById("back-to-top");
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        window.addEventListener("scroll", () => {
+            backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+        });
+
+        backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+    }
+    
+    // FAQ smooth opening
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const summary = item.querySelector('summary');
+        summary.addEventListener('click', function() {
+            const isOpening = !item.open;
+            if (isOpening) {
+                item.style.maxHeight = item.scrollHeight + 'px';
+            }
+        });
+    });
+    
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+        
+        .faq-item {
+            transition: max-height 0.3s ease;
+            max-height: 1000px;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Email copy functionality
+    const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+    emailLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Allow default mailto behavior
+            // Optional: Add analytics tracking
+            console.log('Email link clicked:', this.href);
+        });
+    });
+});
+</script>
+{% endblock %}
