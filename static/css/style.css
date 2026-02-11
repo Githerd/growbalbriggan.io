@@ -592,3 +592,74 @@ footer {
         font-size: 1rem;
     }
 }
+
+/* Add these to your main style.css file */
+
+/* Community page specific animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shine {
+    0% { background-position: -200px; }
+    100% { background-position: calc(200px + 100%); }
+}
+
+.animated {
+    animation: pulse 2s ease-in-out;
+}
+
+/* Interactive elements */
+.map-spot {
+    animation: float 3s ease-in-out infinite;
+}
+
+.map-spot.community-garden {
+    animation-delay: 0s;
+}
+
+.map-spot.market-square {
+    animation-delay: 0.5s;
+}
+
+.map-spot.coastal-path {
+    animation-delay: 1s;
+}
+
+.map-spot.allotments {
+    animation-delay: 1.5s;
+}
+
+/* Sparkle effect for special elements */
+.btn-sparkle {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-sparkle::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+    );
+    animation: shine 3s infinite;
+}
+
+/* Mobile menu for community page */
+.mobile-menu.active {
+    display: flex;
+}
