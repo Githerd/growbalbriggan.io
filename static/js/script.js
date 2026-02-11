@@ -34,6 +34,44 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Add this to your extra_js section
+document.addEventListener('DOMContentLoaded', function() {
+    // Make Watch Here button scroll smoothly to video
+    const watchHereBtn = document.querySelector('.watch-here-btn');
+    if (watchHereBtn) {
+        watchHereBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const videoPlayer = document.querySelector('.video-player');
+            if (videoPlayer) {
+                videoPlayer.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                
+                // Optional: Highlight the video briefly
+                videoPlayer.style.boxShadow = '0 0 0 3px var(--primary-green)';
+                setTimeout(() => {
+                    videoPlayer.style.boxShadow = '';
+                }, 2000);
+            }
+        });
+    }
+    
+    // Make entire video card clickable (excluding the actual button)
+    const videoCards = document.querySelectorAll('.video-card');
+    videoCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Don't trigger if clicking on the watch button itself
+            if (!e.target.closest('.watch-btn')) {
+                const watchBtn = this.querySelector('.watch-btn');
+                if (watchBtn) {
+                    watchBtn.click();
+                }
+            }
+        });
+    });
+});
     
     // Load seasonal tips based on current month
     function loadSeasonalTips() {
